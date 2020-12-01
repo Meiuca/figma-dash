@@ -1,0 +1,6 @@
+node_modules
+yarn-error.log
+tokens
+src
+assets
+figma-dash.config.js
