@@ -5,7 +5,7 @@ const {
   parentContainerTokenRegexTest,
   tokenNameRegexTest,
   parseDeepObj,
-} = require("../etc/functions");
+} = require("figma-dash-core/functions");
 const lodash = require("lodash");
 const { mapTokenValues, mapTokens } = require("./mappers");
 const chalk = require("chalk");

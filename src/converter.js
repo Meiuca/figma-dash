@@ -4,7 +4,7 @@ const {
   runStyleDictionary,
   registerNativeTransformer,
 } = require("./style-dictionary");
-const config = require("./config-handler").handle();
+const config = require("figma-dash-core/config-handler").handle();
 
 function log(module) {
   if (module == "fonts" || module == "figma" || module == "patterns") return;

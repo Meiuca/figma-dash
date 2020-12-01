@@ -1,10 +1,10 @@
 const path = require("path");
-const configHandler = require("./config-handler");
+const configHandler = require("figma-dash-core/config-handler");
 const pathToSrc = path.resolve(__dirname, "../defaults/jota-web.config.js");
 const chalk = require("chalk");
 const figlet = require("figlet");
 const { existsSync, copyFileSync } = require("fs");
-const { tab } = require("./etc/functions");
+const { tab } = require("figma-dash-core/functions");
 
 module.exports = (args) => {
   if (!existsSync(configHandler.path) || args.force) {

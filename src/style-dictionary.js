@@ -1,5 +1,5 @@
 const StyleDictionary = require("style-dictionary");
-const exceptionHandler = require("./exception-handler");
+const exceptionHandler = require("figma-dash-core/exception-handler");
 
 function transformer(prop) {
   let extractedNumber = +/\d+/.exec(prop.value)[0];

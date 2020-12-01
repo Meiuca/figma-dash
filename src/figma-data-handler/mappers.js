@@ -4,7 +4,7 @@ const {
   tokenValueRegexTest,
   parentContainerTokenRegexTest,
   childContainerTokenRegexTest,
-} = require("../etc/functions");
+} = require("figma-dash-core/functions");
 const lodash = require("lodash");
 
 function reduceEntries(prev, curr) {

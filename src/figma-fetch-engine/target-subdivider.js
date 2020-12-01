@@ -1,9 +1,9 @@
 const { writeFileSync, existsSync, mkdirSync } = require("fs");
-const { cleanStr } = require("../etc/functions");
+const { cleanStr } = require("figma-dash-core/functions");
 const lodash = require("lodash");
 const prettier = require("prettier");
 const path = require("path");
-const config = require("../config-handler").handle();
+const config = require("figma-dash-core/config-handler").handle();
 
 function subdivide(item, parentOut, output) {
   Object.entries(item[1]).forEach((subItem) => {

@@ -2,12 +2,12 @@ const { writeFileSync, existsSync, mkdirSync } = require("fs");
 const axios = require("axios").default;
 const lodash = require("lodash");
 const prettier = require("prettier");
-const config = require("../config-handler").handle();
+const config = require("figma-dash-core/config-handler").handle();
 const { getOutArray, handleChildren } = require("../figma-data-handler");
 const path = require("path");
-const exceptionHandler = require("../exception-handler");
+const exceptionHandler = require("figma-dash-core/exception-handler");
 const chalk = require("chalk");
-const { validateFigmaConfig } = require("../etc/validations");
+const { validateFigmaConfig } = require("figma-dash-core/validations");
 const subdivideTarget = require("./target-subdivider");
 
 module.exports = async () => {

@@ -1,9 +1,9 @@
 exports.init = (args = {}) => {
-  require("./cli-src/initializer")(args);
+  require("./src/initializer")(args);
 };
 
 exports.importFromFigma = async (args = {}) => {
-  await require("./cli-src/figma-fetch-engine")();
+  await require("./src/figma-fetch-engine")();
 
   if (args.convert) {
     exports.convertTokens(args);
@@ -11,7 +11,7 @@ exports.importFromFigma = async (args = {}) => {
 };
 
 exports.convertTokens = (args = {}) => {
-  require("./cli-src/converter")(args);
+  require("./src/converter")(args);
 };
 
 exports.linkFonts = () => {
