@@ -37,7 +37,6 @@
     "commander": "^6.2.0",
     "figlet": "^1.5.0",
     "figma-dash-core": "https://github.com/Meiuca/figma-dash-core.git",
-    "figma-dash-fonts": "https://github.com/Meiuca/figma-dash-fonts.git",
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "prettier": "^2.2.0",
