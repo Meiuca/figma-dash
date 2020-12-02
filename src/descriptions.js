@@ -2,10 +2,9 @@ const chalk = require("chalk");
 
 exports.convert = "Convert style tokens";
 
-exports.link =
-  "Download and link fonts using " + chalk.blueBright("yarn react-native link");
+exports.link = "Download and link fonts";
 
-exports.init = "Generate sample " + chalk.greenBright("jota-web.config.js");
+exports.init = "Generate sample " + chalk.greenBright("figma-dash.config.js");
 
 exports.force = "Can be used to reset the configuration.";
 

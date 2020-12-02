@@ -21,9 +21,7 @@ exports.linkFonts = () => {
 exports.doAll = async (args = {}) => {
   exports.init(args);
 
-  await exports.importFromFigma();
-
-  exports.convertTokens(args);
+  await exports.importFromFigma({ ...args, convert: true });
 
   if (args.link) exports.linkFonts();
 };
