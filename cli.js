@@ -16,6 +16,7 @@ commander
 
 commander
   .command("import-from-figma")
+  .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-c, --convert", descriptions.postImport)
   .option("-m, --module <name>", descriptions.module)
   .description(descriptions.import)
@@ -39,6 +40,7 @@ commander
   .command("all")
   .option("-f, --force", descriptions.force)
   .option("-l, --link", descriptions.link)
+  .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-m, --module <name>", descriptions.module)
   .description(descriptions.all)
   .action(actions.doAll);

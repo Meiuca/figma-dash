@@ -15,3 +15,6 @@ exports.import = "Generate tokens from Figma";
 exports.postImport = "Convert tokens after import";
 
 exports.all = "Execute all commands";
+
+exports.noSeparatedTokens =
+  "If this flag is set the api will not generate separated files for each category and item";

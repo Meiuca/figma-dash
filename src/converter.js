@@ -6,6 +6,8 @@ const {
 } = require("./style-dictionary");
 const config = require("figma-dash-core/config-handler").handle();
 
+const meta = require(path.resolve(config.figma.output, "./meta.json"));
+
 function log(module) {
   if (module == "fonts" || module == "figma" || module == "patterns") return;
 
@@ -13,11 +15,7 @@ function log(module) {
     registerNativeTransformer();
   }
 
-  console.log("\n", chalk.greenBright("info"), "converting module:", module);
-
-  let pathToMeta = path.resolve(config.figma.output, "./meta.json");
-
-  let meta = require(pathToMeta);
+  console.log("\n", chalk.greenBright("info"), "Converting module:", module);
 
   runStyleDictionary(meta, module, config[module]);
 }

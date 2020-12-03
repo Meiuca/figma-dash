@@ -7,6 +7,11 @@ declare interface InitArgs {
 
 declare interface ImportArgs {
   /**
+   * If `true` the api will generate separated files for each category and item
+   */
+  separatedTokens?: boolean;
+
+  /**
    * Convert tokens after import
    */
   convert?: boolean;
@@ -44,7 +49,7 @@ export function convertTokens(args?: ConvertArgs): void;
  *
  * Download and link fonts
  */
-export function linkFonts(): void;
+export function linkFonts(): Promise<void>;
 
 /**
  *  Execute all commands
@@ -56,5 +61,10 @@ export function doAll(
        * Download and link fonts
        */
       link?: boolean;
+
+      /**
+       * If `true` the api will generate separated files for each category and item
+       */
+      separatedTokens?: boolean;
     }
 ): Promise<void>;

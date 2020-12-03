@@ -1,5 +1,6 @@
 const StyleDictionary = require("style-dictionary");
 const exceptionHandler = require("figma-dash-core/exception-handler");
+const lodash = require("lodash");
 
 function transformer(prop) {
   let extractedNumber = +/\d+/.exec(prop.value)[0];
@@ -20,17 +21,27 @@ function transformer(prop) {
   return prop.value;
 }
 
-function filesSelector(config, filename) {
+function filesSelector(config, filename, group) {
+  if (group.includes("ios") || group.includes("flutter"))
+    filename = lodash.upperFirst(lodash.camelCase(filename.replace(/-/g, " ")));
+
+  if (group.includes("android"))
+    filename = lodash.snakeCase(filename.replace(/-/g, " "));
+
   if (config.tokens.files)
     return config.tokens.files.map((file) => ({
       ...file,
       destination: file.destination.replace("{f}", filename),
+      className: filename,
+      mapName: filename,
     }));
   else
     return [
       {
         destination: filename + config.tokens.output.extension,
         format: config.tokens.output.format,
+        className: filename,
+        mapName: filename,
       },
     ];
 }
@@ -59,7 +70,7 @@ exports.runStyleDictionary = (inputFiles, group, config) => {
           [group]: {
             transformGroup: group,
             buildPath: config.tokens.output.dir,
-            files: filesSelector(config, filename),
+            files: filesSelector(config, filename, group),
           },
         },
       }).buildAllPlatforms();

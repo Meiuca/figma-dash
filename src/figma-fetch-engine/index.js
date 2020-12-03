@@ -10,7 +10,7 @@ const chalk = require("chalk");
 const { validateFigmaConfig } = require("figma-dash-core/validations");
 const subdivideTarget = require("./target-subdivider");
 
-module.exports = async () => {
+module.exports = async (args) => {
   let figmaUrl;
 
   try {
@@ -19,7 +19,7 @@ module.exports = async () => {
     console.log(
       "\n",
       chalk.greenBright("info"),
-      "importing from ID",
+      "Importing from ID",
       chalk.gray(config.figma.fileID),
       "with access token",
       chalk.gray(config.figma.accessToken),
@@ -60,7 +60,7 @@ module.exports = async () => {
 
     let output = [{ src: outputPath, filename: "tokens" }];
 
-    subdivideTarget(target, output);
+    if (args.separatedTokens) subdivideTarget(target, output);
 
     writeFileSync(
       path.resolve(config.figma.output, "./meta.json"),
@@ -72,5 +72,5 @@ module.exports = async () => {
     exceptionHandler(err, `error thrown when fetching ${figmaUrl}`);
   }
 
-  console.log("\n", chalk.greenBright("info"), "tokens successfully imported");
+  console.log("\n", chalk.greenBright("info"), "Tokens successfully imported");
 };
