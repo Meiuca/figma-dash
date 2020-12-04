@@ -61,6 +61,13 @@ exports.registerNativeTransformer = () => {
   });
 };
 
+exports.registerDefaultTransformer = () => {
+  StyleDictionary.registerTransformGroup({
+    name: "default",
+    transforms: [],
+  });
+};
+
 exports.runStyleDictionary = (inputFiles, group, config) => {
   try {
     inputFiles.forEach(({ src, filename }) => {
