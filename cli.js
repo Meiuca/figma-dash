@@ -8,6 +8,8 @@ const actions = require("./actions");
 
 commander.version(packageJson.version);
 
+commander.name(packageJson.name);
+
 commander
   .command("init")
   .option("-f, --force", descriptions.force)
@@ -45,6 +47,6 @@ commander
   .description(descriptions.all)
   .action(actions.doAll);
 
-console.log("figma-dash v" + packageJson.version);
+console.log(packageJson.name + " v" + packageJson.version);
 
 commander.parse(process.argv);

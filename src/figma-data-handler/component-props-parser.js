@@ -50,8 +50,8 @@ exports.parseComponentProps = (component) => {
     console.log(
       chalk.yellowBright("\nwarn"),
       `Ignoring ${tokenNames
-        .flat(2)
-        .join("-")} because it's values doesn't follow the specified rules`
+        .map((name) => name.join("-"))
+        .join()} because it's values doesn't follow the specified rules`
     );
   }
 };
