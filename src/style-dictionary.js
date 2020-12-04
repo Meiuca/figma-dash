@@ -64,7 +64,7 @@ exports.registerNativeTransformer = () => {
 exports.registerDefaultTransformer = () => {
   StyleDictionary.registerTransformGroup({
     name: "default",
-    transforms: [],
+    transforms: ["name/cti/kebab"],
   });
 };
 

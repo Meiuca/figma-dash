@@ -3,6 +3,7 @@ const chalk = require("chalk");
 const {
   runStyleDictionary,
   registerNativeTransformer,
+  registerDefaultTransformer,
 } = require("./style-dictionary");
 const config = require("figma-dash-core/config-handler").handle();
 
@@ -13,6 +14,10 @@ function log(module) {
 
   if (module == "native") {
     registerNativeTransformer();
+  }
+
+  if (module == "default") {
+    registerDefaultTransformer();
   }
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);

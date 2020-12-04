@@ -20,10 +20,10 @@ module.exports = {
 
   // * You must declare more than zero if you are going to use 'jota-web convert-tokens'
   // * The key of the objects must be one of
-  // https://github.com/amzn/style-dictionary/blob/master/lib/common/transformGroups.js
-  // or
-  // 'native'
-  scss: {
+  //  -> https://github.com/amzn/style-dictionary/blob/master/lib/common/transformGroups.js
+  //  -> 'default'
+  //  -> 'native'
+  default: {
     tokens: {
       output: {
         dir: "src/styles/web/",
