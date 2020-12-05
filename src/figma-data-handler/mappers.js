@@ -29,12 +29,12 @@ exports.mapTokenValues = (child) => {
 
         return [
           tokenName.name.toLowerCase(),
-          token ? cleanTokenValue(token.characters) : "not found",
+          token ? cleanTokenValue(token.name) : "not found",
         ];
       }
     });
   } else {
-    return cleanTokenValue(child.characters);
+    return cleanTokenValue(child.name);
   }
 };
 
