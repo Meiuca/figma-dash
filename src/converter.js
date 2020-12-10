@@ -12,13 +12,9 @@ const meta = require(path.resolve(config.figma.output, "./meta.json"));
 function log(module) {
   if (module == "fonts" || module == "figma" || module == "patterns") return;
 
-  if (module == "native") {
-    registerNativeTransformer();
-  }
+  if (module == "native") registerNativeTransformer();
 
-  if (module == "default") {
-    registerDefaultTransformer();
-  }
+  if (module == "default") registerDefaultTransformer();
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);
 

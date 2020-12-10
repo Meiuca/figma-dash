@@ -1,24 +1,26 @@
 const StyleDictionary = require("style-dictionary");
 const exceptionHandler = require("figma-dash-core/exception-handler");
+const config = require("figma-dash-core/config-handler").handle();
 const lodash = require("lodash");
 
+StyleDictionary.registerFilter({
+  name: "isNotComponent",
+  matcher: function (prop) {
+    return prop.attributes.category !== (config.ds || "component");
+  },
+});
+
 function transformer(prop) {
-  let extractedNumber = +/\d+/.exec(prop.value)[0];
+  let extractedNumber = parseFloat(prop.value);
 
-  if (/\d+(?=px)/.test(prop.value)) prop.value = extractedNumber;
+  if (isNaN(extractedNumber)) return prop.value;
 
-  if (/\d+(?=\.\d+)/.test(prop.value)) prop.value = +prop.value;
-
-  if (/\d+(?=rem|em)/.test(prop.value)) prop.value = extractedNumber * 16;
-
-  if (/\d+(?=%)/.test(prop.value))
-    prop.value = {
-      original: prop.value,
-      number: extractedNumber,
-      decimal: extractedNumber / 100,
-    };
-
-  return prop.value;
+  return {
+    original: prop.value,
+    number: extractedNumber,
+    scale: extractedNumber * 16,
+    decimal: extractedNumber / 100,
+  };
 }
 
 function filesSelector(config, filename, group) {
@@ -28,36 +30,41 @@ function filesSelector(config, filename, group) {
   if (group.includes("android"))
     filename = lodash.snakeCase(filename.replace(/-/g, " "));
 
-  if (config.tokens.files)
+  if (config.tokens.files) {
     return config.tokens.files.map((file) => ({
       ...file,
-      destination: file.destination.replace("{f}", filename),
+      destination: file.destination.replace(/\{f\}/g, filename),
       className: filename,
       mapName: filename,
+      filter: file.format != "scss/components" ? "isNotComponent" : false,
     }));
-  else
+  } else {
     return [
       {
         destination: filename + config.tokens.output.extension,
         format: config.tokens.output.format,
         className: filename,
         mapName: filename,
+        filter:
+          config.tokens.output.format != "scss/components"
+            ? "isNotComponent"
+            : false,
       },
     ];
+  }
 }
 
 exports.registerNativeTransformer = () => {
   StyleDictionary.registerTransform({
-    name: "size/nativeSize",
+    name: "size/object",
     type: "value",
-    matcher: (prop) =>
-      /\d+(?=px|rem|em|%|\.\d+)/.test(prop.value) && !/\s/.test(prop.value),
+    matcher: (prop) => prop.attributes.category === "size",
     transformer,
   });
 
   StyleDictionary.registerTransformGroup({
     name: "native",
-    transforms: ["name/cti/camel", "size/nativeSize", "color/css"],
+    transforms: ["name/cti/camel", "size/object", "color/css"],
   });
 };
 
@@ -68,9 +75,9 @@ exports.registerDefaultTransformer = () => {
   });
 };
 
-exports.runStyleDictionary = (inputFiles, group, config) => {
+exports.runStyleDictionary = (meta, group, config) => {
   try {
-    inputFiles.forEach(({ src, filename }) => {
+    meta.forEach(({ src, filename }) => {
       StyleDictionary.extend({
         source: [src],
         platforms: {

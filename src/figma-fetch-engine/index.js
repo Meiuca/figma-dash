@@ -47,9 +47,7 @@ module.exports = async (args) => {
 
     let outputPath = path.resolve(config.figma.output, "./tokens.json");
 
-    let target = {};
-
-    target = lodash.merge(target, ...getOutArray());
+    let target = lodash.merge({}, ...getOutArray());
 
     writeFileSync(
       outputPath,
