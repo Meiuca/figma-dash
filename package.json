@@ -41,5 +41,8 @@
     "lodash": "^4.17.20",
     "prettier": "^2.2.0",
     "style-dictionary": "^2.10.2"
+  },
+  "peerDependencies": {
+    "dotenv": "^8.2.0"
   }
 }

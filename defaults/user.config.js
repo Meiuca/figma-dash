@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 module.exports = {
   /* These are the default patterns
    *   patterns: {
@@ -15,7 +17,7 @@ module.exports = {
   ds: "jota",
 
   figma: {
-    accessToken: "000000-00000000-0000-0000-0000-000000000000",
+    accessToken: process.env.FIGMA_ACCESS_TOKEN,
 
     fileID: "aaaaaaaaaaaaaaaaaaaaaa",
 
