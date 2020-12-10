@@ -10,7 +10,13 @@ const config = require("figma-dash-core/config-handler").handle();
 const meta = require(path.resolve(config.figma.output, "./meta.json"));
 
 function log(module) {
-  if (module == "fonts" || module == "figma" || module == "patterns") return;
+  if (
+    module == "fonts" ||
+    module == "figma" ||
+    module == "patterns" ||
+    module == "ds"
+  )
+    return;
 
   if (module == "native") registerNativeTransformer();
 
