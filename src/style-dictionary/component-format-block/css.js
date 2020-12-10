@@ -8,7 +8,9 @@ exports.formatter = ({ allProperties }) => {
 
   let mapValue = ({ name, item }) => {
     if (item.value && item.name) {
-      props.push(`--${item.name}: ${item.value};`);
+      let prop = `--${item.name}: ${item.value};`;
+
+      if (!props.includes(prop)) props.push(prop);
 
       return `${name}: var(--${item.name});`;
     } else {
