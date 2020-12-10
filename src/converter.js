@@ -1,26 +1,14 @@
 const path = require("path");
 const chalk = require("chalk");
-const {
-  runStyleDictionary,
-  registerNativeTransformer,
-  registerDefaultTransformer,
-} = require("./style-dictionary");
+const runStyleDictionary = require("./style-dictionary");
 const config = require("figma-dash-core/config-handler").handle();
 
 const meta = require(path.resolve(config.figma.output, "./meta.json"));
 
+const excludedObjects = ["fonts", "figma", "patterns", "ds"];
+
 function log(module) {
-  if (
-    module == "fonts" ||
-    module == "figma" ||
-    module == "patterns" ||
-    module == "ds"
-  )
-    return;
-
-  if (module == "native") registerNativeTransformer();
-
-  if (module == "default") registerDefaultTransformer();
+  if (excludedObjects.includes(module)) return;
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);
 

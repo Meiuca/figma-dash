@@ -6,6 +6,7 @@ const {
   childContainerTokenRegexTest,
 } = require("figma-dash-core/functions");
 const lodash = require("lodash");
+const { handleComponentValue } = require("./component-value-handler");
 
 function reduceEntries(prev, curr) {
   prev = typeof prev == "object" ? Object.values(prev)[0].value : prev;
@@ -34,7 +35,9 @@ exports.mapTokenValues = (child) => {
       }
     });
   } else {
-    return cleanTokenValue(child.name);
+    let cleanStr = cleanTokenValue(child.name);
+
+    return Object.assign(cleanStr, { chars: child.characters });
   }
 };
 
@@ -62,7 +65,7 @@ exports.mapTokens = (tokenNames, mappedTokenValues) => {
       });
     } else {
       objToBeReduced = {
-        value: mappedTokenValues[index],
+        value: handleComponentValue(mappedTokenValues[index], attributes),
         attributes,
       };
     }

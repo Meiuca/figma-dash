@@ -1,3 +1,4 @@
+// Put your Figma Access Token in a .env file and never share this file with strangers
 require("dotenv").config();
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
 
   /**
    * Your Design System identifier.
-   * Use only lowercase letters and underscore
+   * Use only lowercase letters
    */
   ds: "jota",
 
@@ -32,19 +33,36 @@ module.exports = {
    *    * `native`
    */
   default: {
+    // `isNotComponent` can also be declared here
+    // filter: "isNotComponent",
+
     tokens: {
       output: {
         dir: "src/styles/web/",
-
-        extension: ".scss",
-
-        /**
-         * One of:
-         *  * https://github.com/amzn/style-dictionary/blob/main/docs/formats.md
-         *  * `scss/components`
-         */
-        format: "scss/variables",
       },
+      files: [
+        {
+          // '{f}' for filename
+          destination: "{f}-components.scss",
+
+          /**
+           * One of:
+           *  * https://github.com/amzn/style-dictionary/blob/main/docs/formats.md
+           *  * `css/components`
+           *  * `scss/components`
+           */
+          format: "scss/components",
+        },
+        {
+          destination: "{f}-variables.scss",
+
+          format: "scss/variables",
+
+          // `isNotComponent` is a custom internal filter that cleans dirty output generated
+          // by formatters that do not support components
+          filter: "isNotComponent",
+        },
+      ],
     },
   },
 
@@ -60,27 +78,6 @@ module.exports = {
    * },
    */
 
-  /*
-   * ios: {
-   *   tokens: {
-   *     output: {
-   *       dir: "src/styles/ios/",
-   *     },
-   *     files: [
-   *       {
-   *         // '{f}' for filename
-   *         destination: "{f}.h",
-   *         format: "ios/singleton.h",
-   *       },
-   *       {
-   *         destination: "{f}.m",
-   *         format: "ios/singleton.m",
-   *       }
-   *     ],
-   *   },
-   * },
-   */
-
   /**
    * You can declare files, urls or directLinks, but you cannot declare
    * `fonts: {}` if you are going to use `jota-web link-fonts`
@@ -92,6 +89,8 @@ module.exports = {
 
     /**
      * Use the key `{f}` to declare where the font family name must be placed and `{w}` to the weight
+     *
+     * Required if `files: true`
      */
     provider: "https://fonts.googleapis.com/css2?family={f}:wght@{w}",
 
