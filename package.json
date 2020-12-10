@@ -43,6 +43,6 @@
     "style-dictionary": "^2.10.2"
   },
   "peerDependencies": {
-    "dotenv": "8.2.0"
+    "dotenv": "8.x"
   }
 }
