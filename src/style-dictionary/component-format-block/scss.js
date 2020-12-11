@@ -21,7 +21,7 @@ exports.formatter = ({ allProperties }) => {
   allProperties.forEach((prop) => {
     if (prop.attributes.category === (config.ds || "component")) {
       components.push(
-        `.${prop.name} {\n ${prop.value.map(mapValue).join("\n ")}\n}`
+        `.${prop.path.join("-")} {\n ${prop.value.map(mapValue).join("\n ")}\n}`
       );
     }
   });

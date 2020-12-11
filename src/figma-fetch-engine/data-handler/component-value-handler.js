@@ -1,4 +1,5 @@
 const config = require("figma-dash-core/config-handler").handle();
+const { tokenNameRegexTest } = require("figma-dash-core/functions");
 
 exports.handleComponentValue = (mappedTokenValue, attributes) => {
   if (!mappedTokenValue.chars || attributes.category !== config.ds)
@@ -15,12 +16,17 @@ exports.handleComponentValue = (mappedTokenValue, attributes) => {
 
     mappedTokenValue.chars = mappedTokenValue.chars.replace(mappedChars[0], "");
 
+    mappedChars[2] = mappedChars[2].replace(/^\s*/g, "");
+
+    let parsedItem = tokenNameRegexTest(mappedChars[2])
+      ? "{" +
+        mappedChars[2].replace(/[^A-Za-z0-9\-_\s]/g, "").replace(/-/g, ".") +
+        "}"
+      : mappedChars[2];
+
     componentProps.push({
       name: mappedChars[1],
-      item:
-        "{" +
-        mappedChars[2].replace(/[^A-Za-z0-9\-_]/g, "").replace(/-/g, ".") +
-        "}",
+      item: parsedItem,
     });
   }
 
