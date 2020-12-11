@@ -52,6 +52,12 @@ module.exports = {
            *  * `scss/components`
            */
           format: "scss/components",
+
+          /**
+           * This property is usefull when creating multiple files ( import without `--no-separated-tokens` flag ),
+           * although it is not recommended in this case
+           */
+          include: "tokens/tokens.json",
         },
         {
           destination: "{f}-variables.scss",
