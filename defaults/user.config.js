@@ -6,8 +6,8 @@ module.exports = {
    *   patterns: {
    *     tokenNameIdentifier: /^\$/,
    *     tokenValueIdentifier: /^#|^~|\d+(?=px|rem|em|%|\.\d+)/,
-   *     parentContainerTokenIdentifier: /:{2}/,
-   *     childContainerTokenIdentifier: /:{1}/,
+   *     parentContainerTokenIdentifier: /^:{2}/,
+   *     childContainerTokenIdentifier: /^:{1}/,
    *   },
    */
 
