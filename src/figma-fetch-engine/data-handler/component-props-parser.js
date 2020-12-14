@@ -47,7 +47,7 @@ exports.parseComponentProps = (component) => {
 
     outArray.push(out);
   } else {
-    console.log(
+    console.warn(
       chalk.yellowBright("\nwarn"),
       `Ignoring ${tokenNames
         .map((name) => name.join("-"))

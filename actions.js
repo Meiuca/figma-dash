@@ -23,5 +23,5 @@ exports.doAll = async (args = {}) => {
 
   await exports.importFromFigma({ ...args, convert: true });
 
-  if (args.link) exports.linkFonts();
+  if (args.link) await exports.linkFonts();
 };
