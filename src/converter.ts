@@ -1,13 +1,15 @@
-const path = require("path");
-const chalk = require("chalk");
-const runStyleDictionary = require("./style-dictionary");
-const config = require("figma-dash-core/config-handler").handle();
+import path from "path";
+import chalk from "chalk";
+import runStyleDictionary from "./style-dictionary";
+import { handle } from "figma-dash-core/config-handler";
+
+const config = handle();
 
 const meta = require(path.resolve(config.figma.output, "./meta.json"));
 
 const excludedObjects = ["fonts", "figma", "patterns", "ds"];
 
-function log(module) {
+function log(module: string) {
   if (excludedObjects.includes(module)) return;
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);
@@ -15,10 +17,10 @@ function log(module) {
   runStyleDictionary(meta, module, config[module]);
 }
 
-module.exports = (args) => {
+export default function (args: import("../types/figma-dash").ConvertArgs) {
   if (args.module) {
     log(args.module);
   } else {
     Object.keys(config).forEach(log);
   }
-};
+}

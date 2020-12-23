@@ -1,19 +1,20 @@
-const path = require("path");
-const configHandler = require("figma-dash-core/config-handler");
+import path from "path";
+import configHandler from "figma-dash-core/config-handler";
+import chalk from "chalk";
+import figlet from "figlet";
+import { existsSync, copyFileSync } from "fs";
+import { tab } from "figma-dash-core/functions";
+import { capitalize, upperCase } from "lodash";
+import packageJson from "../package.json";
+
 const pathToSrc = path.resolve(__dirname, "../defaults/user.config.js");
-const chalk = require("chalk");
-const figlet = require("figlet");
-const { existsSync, copyFileSync } = require("fs");
-const { tab } = require("figma-dash-core/functions");
-const { capitalize, upperCase } = require("lodash");
-const packageJson = require("../package.json");
 
 const parsedName = packageJson.name.split(/-|[A-Z]/);
 const blockName = parsedName
   .map((str, index) => upperCase(str) + "\n" + "  ".repeat(index + 1))
   .join("");
 
-module.exports = (args) => {
+export default function (args: import("../types/figma-dash").InitArgs) {
   if (!existsSync(configHandler.path) || args.force) {
     console.log(
       chalk.bold.green(figlet.textSync(blockName, "JS Block Letters")),
@@ -29,4 +30,4 @@ module.exports = (args) => {
       parsedName.map(capitalize).join(" ") + " config file already exists.\n"
     );
   }
-};
+}

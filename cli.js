@@ -3,7 +3,7 @@
 const commander = require("commander");
 const packageJson = require("./package.json");
 
-const descriptions = require("./src/descriptions");
+const descriptions = require("./out/src/descriptions");
 const actions = require("./actions");
 
 commander.version(packageJson.version);
@@ -21,7 +21,7 @@ commander
   .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-c, --convert", descriptions.postImport)
   .option("-m, --module <name>", descriptions.module)
-  .description(descriptions.import)
+  .description(descriptions.imports)
   .action(actions.importFromFigma)
   .alias("import");
 
