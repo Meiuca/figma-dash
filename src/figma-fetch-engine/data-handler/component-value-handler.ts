@@ -1,9 +1,8 @@
-import { handle } from "figma-dash-core/config-handler";
-import { tokenNameRegexTest } from "figma-dash-core/functions";
+import { Functions, ConfigHandler } from "figma-dash-core";
 
 import { ComponentProps, SignedString, StyleAttributes } from "../../../types";
 
-const config = handle();
+const config = ConfigHandler.handle();
 
 export function handleComponentValue(
   tokenValue: SignedString,
@@ -27,7 +26,7 @@ export function handleComponentValue(
 
     let parsedChars = (/[A-Za-z0-9\-_]+/.exec(mappedChars[2]) || [""])[0];
 
-    let parsedItem = tokenNameRegexTest(mappedChars[2])
+    let parsedItem = Functions.tokenNameRegexTest(mappedChars[2])
       ? "{" + parsedChars!.replace(/-/g, ".") + "}"
       : parsedChars!.replace(/;/g, "");
 

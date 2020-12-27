@@ -1,16 +1,18 @@
-import {
+import { Functions } from "figma-dash-core";
+import lodash from "lodash";
+import { mapTokenValues, mapTokens } from "./mappers";
+import chalk from "chalk";
+
+import { FigmaComponent, Target } from "../../../types";
+
+const {
   depth,
   cleanStr,
   tokenValueRegexTest,
   parentContainerTokenRegexTest,
   tokenNameRegexTest,
   parseDeepObj,
-} from "figma-dash-core/functions";
-import lodash from "lodash";
-import { mapTokenValues, mapTokens } from "./mappers";
-import chalk from "chalk";
-
-import { FigmaComponent, Target } from "../../../types";
+} = Functions;
 
 const outArray: Target[] = [];
 

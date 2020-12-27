@@ -3,7 +3,7 @@
 const commander = require("commander");
 const packageJson = require("./package.json");
 
-const descriptions = require("./out/src/descriptions");
+const descriptions = require("./dist/descriptions");
 const actions = require("./actions");
 
 commander.version(packageJson.version);

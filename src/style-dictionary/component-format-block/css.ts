@@ -1,11 +1,11 @@
-import { handle } from "figma-dash-core/config-handler";
+import { ConfigHandler } from "figma-dash-core";
 
 import {
   TransformedComponent,
   TransformedComponentProps,
 } from "../../../types";
 
-const config = handle();
+const config = ConfigHandler.handle();
 
 export const name = "css/components";
 

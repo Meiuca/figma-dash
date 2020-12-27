@@ -47,3 +47,15 @@ export interface StyleAttributes {
   category: string;
   type: string;
 }
+
+export interface File {
+  output: {
+    dir: string;
+  };
+  destination: string;
+  format?: string;
+  include?: string;
+  filter?: string | object;
+  className: string;
+  mapName: string;
+}

@@ -1,9 +1,9 @@
 import path from "path";
-import configHandler from "figma-dash-core/config-handler";
+import { path as pathToFigmaDash } from "figma-dash-core/dist/config-handler";
+import { tab } from "figma-dash-core/dist/functions";
 import chalk from "chalk";
 import figlet from "figlet";
 import { existsSync, copyFileSync } from "fs";
-import { tab } from "figma-dash-core/functions";
 import { capitalize, upperCase } from "lodash";
 import packageJson from "../package.json";
 
@@ -15,14 +15,14 @@ const blockName = parsedName
   .join("");
 
 export default function (args: import("../types/figma-dash").InitArgs) {
-  if (!existsSync(configHandler.path) || args.force) {
+  if (!existsSync(pathToFigmaDash) || args.force) {
     console.log(
       chalk.bold.green(figlet.textSync(blockName, "JS Block Letters")),
       `\n\n${tab((parsedName.length - 1) * 3)}Welcome\n\n`,
       "Initialized with sample configuration"
     );
 
-    copyFileSync(pathToSrc, configHandler.path);
+    copyFileSync(pathToSrc, pathToFigmaDash);
   } else {
     console.log(
       "\n",

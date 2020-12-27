@@ -8,13 +8,19 @@
   "bin": {
     "figma-dash": "cli.js"
   },
+  "scripts": {
+    "postinstall": "node ../figma-dash-core/tsc"
+  },
   "main": "actions.js",
   "types": "types/figma-dash.d.ts",
   "files": [
-    "out",
+    "dist",
+    "src",
     "defaults",
     "cli.js",
-    "actions.js"
+    "actions.js",
+    "types",
+    "tsconfig.json"
   ],
   "keywords": [
     "style-dictionary",
@@ -38,7 +44,7 @@
     "chalk": "^4.1.0",
     "commander": "^6.2.0",
     "figlet": "^1.5.0",
-    "figma-dash-core": "https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git",
+    "figma-dash-core": "https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git#ts",
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
     "prettier": "^2.2.0",

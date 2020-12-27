@@ -1,10 +1,12 @@
 import lodash from "lodash";
 
+import { File } from "../../types";
+
 export default function (
-  config: { [key: string]: any },
+  config: import("figma-dash-core").ConfigHandler.FigmaDashModule,
   filename: string,
   group: string
-) {
+): File[] {
   if (group.includes("ios") || group.includes("flutter"))
     filename = lodash.upperFirst(lodash.camelCase(filename.replace(/-/g, " ")));
 

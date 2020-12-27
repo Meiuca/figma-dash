@@ -1,9 +1,9 @@
 import path from "path";
 import chalk from "chalk";
 import runStyleDictionary from "./style-dictionary";
-import { handle } from "figma-dash-core/config-handler";
+import { ConfigHandler } from "figma-dash-core";
 
-const config = handle();
+const config = ConfigHandler.handle();
 
 const meta = require(path.resolve(config.figma.output, "./meta.json"));
 
@@ -14,7 +14,7 @@ function log(module: string) {
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);
 
-  runStyleDictionary(meta, module, config[module]);
+  runStyleDictionary(meta, module, config[module]!);
 }
 
 export default function (args: import("../types/figma-dash").ConvertArgs) {

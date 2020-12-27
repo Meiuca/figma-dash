@@ -1,10 +1,4 @@
-import {
-  depth,
-  cleanTokenValue,
-  tokenValueRegexTest,
-  parentContainerTokenRegexTest,
-  childContainerTokenRegexTest,
-} from "figma-dash-core/functions";
+import { Functions } from "figma-dash-core";
 import lodash from "lodash";
 import { handleComponentValue } from "./component-value-handler";
 
@@ -17,6 +11,14 @@ import {
   SignedString,
   TargetData,
 } from "../../../types";
+
+const {
+  depth,
+  cleanTokenValue,
+  tokenValueRegexTest,
+  parentContainerTokenRegexTest,
+  childContainerTokenRegexTest,
+} = Functions;
 
 function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
   prev = typeof prev == "object" ? Object.values(prev)[0]!.value : prev;
@@ -49,7 +51,7 @@ export function mapTokenValues(child: FigmaComponent): MapTokenValueReturn {
   } else {
     let cleanStr = cleanTokenValue(child.name);
 
-    return Object.assign(cleanStr, { chars: child.characters });
+    return Object.assign(cleanStr, { chars: child.characters || "" });
   }
 }
 
@@ -65,7 +67,7 @@ export function mapTokens(
       type: tokenNames.flat(depth(tokenNames))[1] as string,
     };
 
-    if (depth(mappedTokenValues[index]) > 1) {
+    if (depth(mappedTokenValues[index] as any[]) > 1) {
       let entriesFromTokenValues = (mappedTokenValues[
         index
       ] as StringTupleArray).map((value) => ({

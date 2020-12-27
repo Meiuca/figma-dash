@@ -2,15 +2,13 @@ import { writeFileSync, existsSync, mkdirSync } from "fs";
 import axios from "axios";
 import lodash from "lodash";
 import prettier from "prettier";
-import { handle } from "figma-dash-core/config-handler";
+import { ConfigHandler, ExceptionHandler, Validations } from "figma-dash-core";
 import handleChildren from "./data-handler";
 import path from "path";
-import exceptionHandler from "figma-dash-core/exception-handler";
 import chalk from "chalk";
-import { validateFigmaConfig } from "figma-dash-core/validations";
 import subdivideTarget from "./target-subdivider";
 
-const config = handle();
+const config = ConfigHandler.handle();
 
 export default async function (
   args: import("../../types/figma-dash").ImportArgs
@@ -18,7 +16,7 @@ export default async function (
   let figmaUrl = "";
 
   try {
-    validateFigmaConfig();
+    Validations.validateFigmaConfig();
 
     console.log(
       "\n",
@@ -69,7 +67,7 @@ export default async function (
       })
     );
   } catch (err) {
-    exceptionHandler(err, `error thrown when fetching ${figmaUrl}`);
+    ExceptionHandler(err, `error thrown when fetching ${figmaUrl}`);
   }
 
   console.log("\n", chalk.greenBright("info"), "Tokens successfully imported");

@@ -1,15 +1,14 @@
 import StyleDictionary from "style-dictionary";
-import exceptionHandler from "figma-dash-core/exception-handler";
-import { handle } from "figma-dash-core/config-handler";
+import { ExceptionHandler, ConfigHandler } from "figma-dash-core";
 import transformer from "./react-native-transformer";
 import filesSelector from "./files-selector";
 import * as cssFormatBlock from "./component-format-block/css";
 import * as scssFormatBlock from "./component-format-block/scss";
 import lodash from "lodash";
 
-import { Meta } from "../../types";
+import { File, Meta } from "../../types";
 
-const dashConfig = handle();
+const dashConfig = ConfigHandler.handle();
 
 StyleDictionary.registerFilter({
   name: "isNotComponent",
@@ -42,9 +41,9 @@ StyleDictionary.registerTransformGroup({
 export default function (
   meta: Meta[],
   module: string,
-  config: { [key: string]: any }
+  config: import("figma-dash-core").ConfigHandler.FigmaDashModule
 ) {
-  let filterFn = (file: { include?: string[] }) => file.include;
+  let filterFn = (file: File) => file.include;
 
   try {
     meta.forEach(({ src, filename }) => {
@@ -55,7 +54,12 @@ export default function (
       files.forEach((file) => {
         let mappedInclude = [file].filter(filterFn).map(filterFn);
 
-        if (src.includes(dashConfig.ds) && mappedInclude.length == 0) return;
+        if (
+          src.includes(dashConfig.ds || "undefined") &&
+          mappedInclude.length == 0
+        ) {
+          return;
+        }
 
         SDClone.extend({
           source: [src],
@@ -71,6 +75,6 @@ export default function (
       });
     });
   } catch (err) {
-    exceptionHandler(err, "Exception thrown while handling module: " + module);
+    ExceptionHandler(err, "Exception thrown while handling module: " + module);
   }
 }
