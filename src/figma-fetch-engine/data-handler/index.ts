@@ -1,21 +1,31 @@
-import { getOutArray, parseComponentProps } from "./component-props-parser";
+import InitComponentsPropParser from "./component-props-parser";
+import FigmaDashCore from "figma-dash-core";
 
 import { FigmaComponent } from "../../../types";
 
-export default function handleChildren(component: FigmaComponent) {
-  if (component.children) {
-    component.children.forEach((child) => {
-      if (child.children) {
-        parseComponentProps(child);
+export default function handleChildren(
+  component: FigmaComponent,
+  core: FigmaDashCore
+) {
+  let { getOutArray, parseComponentProps } = InitComponentsPropParser(core);
 
-        handleChildren(child);
-      } else {
-        parseComponentProps(component);
-      }
-    });
-  } else {
-    parseComponentProps(component);
+  function handleRecursively(cp: FigmaComponent) {
+    if (cp.children) {
+      cp.children.forEach((child) => {
+        if (child.children) {
+          parseComponentProps(child);
+
+          handleRecursively(child);
+        } else {
+          parseComponentProps(cp);
+        }
+      });
+    } else {
+      parseComponentProps(cp);
+    }
   }
+
+  handleRecursively(component);
 
   return getOutArray();
 }

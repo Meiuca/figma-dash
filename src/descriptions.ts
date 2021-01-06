@@ -1,14 +1,16 @@
 import chalk from "chalk";
-import packageJson from "../package.json";
+
+export const path =
+  "The path where the config file will be placed. If ommited the system will resolve to the cwd";
 
 export const convert = "Convert style tokens";
 
 export const link = "Download and link fonts";
 
 export const init =
-  "Generate sample " + chalk.greenBright(packageJson.name + ".config.js");
+  "Generate sample " + chalk.greenBright("figma-dash.config.js");
 
-export const force = "Can be used to reset the configuration.";
+export const force = "Can be used to reset the configuration";
 
 export const module = "Handle a specific module";
 

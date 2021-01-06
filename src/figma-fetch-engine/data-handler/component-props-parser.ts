@@ -1,52 +1,49 @@
-import { Functions } from "figma-dash-core";
+import FigmaDashCore from "figma-dash-core";
+import { Functions } from "figma-dash-core/dist/functions";
 import lodash from "lodash";
-import { mapTokenValues, mapTokens } from "./mappers";
+import InitMappers, { Mappers } from "./mappers";
 import chalk from "chalk";
 
 import { FigmaComponent, Target } from "../../../types";
 
-const {
-  depth,
-  cleanStr,
-  tokenValueRegexTest,
-  parentContainerTokenRegexTest,
-  tokenNameRegexTest,
-  parseDeepObj,
-} = Functions;
-
 const outArray: Target[] = [];
 
-export function parseComponentProps(component: FigmaComponent) {
+function parseComponentProps(
+  this: Mappers & Functions,
+  component: FigmaComponent
+) {
   if (!component.children || !Array.isArray(component.children)) return;
 
   let tokenNames: string[][] = [];
 
   let hasPropName = component.children.some((child) =>
-    tokenNameRegexTest(child.name)
+    this.tokenNameRegexTest(child.name)
   );
 
   if (hasPropName) {
     tokenNames = component.children
-      .filter((child) => tokenNameRegexTest(child.name))
+      .filter((child) => this.tokenNameRegexTest(child.name))
       .map((child) =>
-        child.name.split("-").map((item) => cleanStr(item).replace(/-/g, ""))
+        child.name
+          .split("-")
+          .map((item) => this.cleanStr(item).replace(/-/g, ""))
       );
   } else return;
 
   let filteredTokenValues = component.children.filter(
     (child) =>
-      tokenValueRegexTest(child.name) ||
-      (parentContainerTokenRegexTest(child.name) &&
-        parseDeepObj(child).some(tokenValueRegexTest))
+      this.tokenValueRegexTest(child.name) ||
+      (this.parentContainerTokenRegexTest(child.name) &&
+        this.parseDeepObj(child).some(this.tokenValueRegexTest))
   );
 
   if (filteredTokenValues.length > 0) {
-    let mappedTokenValues = filteredTokenValues.map(mapTokenValues);
+    let mappedTokenValues = filteredTokenValues.map(this.mapTokenValues);
 
-    let out = tokenNames.map(mapTokens(tokenNames, mappedTokenValues));
+    let out = tokenNames.map(this.mapTokens(tokenNames, mappedTokenValues));
 
     let toPush = out
-      .flat(depth(out))
+      .flat(this.depth(out))
       .reduce((prev, curr) => lodash.merge(prev, curr), {}) as Target;
 
     outArray.push(toPush);
@@ -60,6 +57,21 @@ export function parseComponentProps(component: FigmaComponent) {
   }
 }
 
-export function getOutArray() {
+function getOutArray() {
   return outArray;
+}
+
+export default function init(core: FigmaDashCore) {
+  return {
+    parseComponentProps: parseComponentProps.bind({
+      ...core.functions,
+      ...InitMappers(core),
+    }),
+    getOutArray,
+  };
+}
+
+export interface ComponentPropsParser {
+  parseComponentProps: (component: FigmaComponent) => void;
+  getOutArray: () => Target[];
 }

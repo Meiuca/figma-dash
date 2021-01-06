@@ -1,61 +1,32 @@
 import StyleDictionary from "style-dictionary";
-import { ExceptionHandler, ConfigHandler } from "figma-dash-core";
-import transformer from "./react-native-transformer";
+import { FigmaDashModule } from "figma-dash-core/dist/config-handler";
+import FigmaDashCore from "figma-dash-core";
 import filesSelector from "./files-selector";
-import * as cssFormatBlock from "./component-format-block/css";
-import * as scssFormatBlock from "./component-format-block/scss";
 import lodash from "lodash";
-
 import { File, Meta } from "../../types";
+import createRegisters from "./create-registers";
 
-const dashConfig = ConfigHandler.handle();
-
-StyleDictionary.registerFilter({
-  name: "isNotComponent",
-  matcher: function (prop) {
-    return prop.attributes.category !== (dashConfig.ds || "component");
-  },
-});
-
-StyleDictionary.registerFormat(cssFormatBlock);
-
-StyleDictionary.registerFormat(scssFormatBlock);
-
-StyleDictionary.registerTransform({
-  name: "size/object",
-  type: "value",
-  matcher: (prop) => prop.attributes.category === "size",
-  transformer,
-});
-
-StyleDictionary.registerTransformGroup({
-  name: "native",
-  transforms: ["name/cti/camel", "size/object", "color/css"],
-});
-
-StyleDictionary.registerTransformGroup({
-  name: "default",
-  transforms: ["name/cti/kebab"],
-});
-
-export default function (
+export default function runStyleDictionary(
   meta: Meta[],
   module: string,
-  config: import("figma-dash-core").ConfigHandler.FigmaDashModule
+  moduleConfig: FigmaDashModule,
+  core: FigmaDashCore
 ) {
+  createRegisters(core);
+
   let filterFn = (file: File) => file.include;
 
   try {
     meta.forEach(({ src, filename }) => {
       let SDClone = lodash.cloneDeep(StyleDictionary);
 
-      let files = filesSelector(config, filename, module);
+      let files = filesSelector(moduleConfig, filename, module);
 
       files.forEach((file) => {
-        let mappedInclude = [file].filter(filterFn).map(filterFn);
+        let mappedInclude = [file].filter(filterFn).map(filterFn) as string[];
 
         if (
-          src.includes(dashConfig.ds || "undefined") &&
+          src.includes(core.config.ds || "undefined") &&
           mappedInclude.length == 0
         ) {
           return;
@@ -67,7 +38,7 @@ export default function (
           platforms: {
             [module]: {
               transformGroup: module,
-              buildPath: config.tokens.output.dir,
+              buildPath: moduleConfig.tokens.output.dir,
               files: [file],
             },
           },
@@ -75,6 +46,9 @@ export default function (
       });
     });
   } catch (err) {
-    ExceptionHandler(err, "Exception thrown while handling module: " + module);
+    core.exceptionHandler(
+      err,
+      "Exception thrown while handling module: " + module
+    );
   }
 }

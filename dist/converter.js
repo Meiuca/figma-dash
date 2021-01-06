@@ -1,0 +1,25 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("path"));
+const chalk_1 = __importDefault(require("chalk"));
+const style_dictionary_1 = __importDefault(require("./style-dictionary"));
+const excludedObjects = ["fonts", "figma", "patterns", "ds"];
+function log(module, meta, core) {
+    if (excludedObjects.includes(module))
+        return;
+    console.log("\n", chalk_1.default.greenBright("info"), "Converting module:", module);
+    style_dictionary_1.default(meta, module, core.config[module], core);
+}
+function default_1(args = {}) {
+    let meta = require(path_1.default.resolve(this.core.config.figma.output, "./meta.json"));
+    if (args.module) {
+        log(args.module, meta, this.core);
+    }
+    else {
+        Object.keys(this.core.config).forEach((cf) => log(cf, meta, this.core));
+    }
+}
+exports.default = default_1;

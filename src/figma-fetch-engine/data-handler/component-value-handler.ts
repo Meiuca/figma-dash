@@ -1,14 +1,14 @@
-import { Functions, ConfigHandler } from "figma-dash-core";
+import FigmaDashCore from "figma-dash-core";
 
 import { ComponentProps, SignedString, StyleAttributes } from "../../../types";
 
-const config = ConfigHandler.handle();
-
-export function handleComponentValue(
+export default function (
   tokenValue: SignedString,
-  attributes: StyleAttributes
+  attributes: StyleAttributes,
+  core: FigmaDashCore
 ) {
-  if (!tokenValue.chars || attributes.category !== config.ds) return tokenValue;
+  if (!tokenValue.chars || attributes.category !== core.config.ds)
+    return tokenValue;
 
   let componentPropsRegExp = /(.+):(.+)(?:;|\n|$)/;
 
@@ -26,7 +26,7 @@ export function handleComponentValue(
 
     let parsedChars = (/[A-Za-z0-9\-_]+/.exec(mappedChars[2]) || [""])[0];
 
-    let parsedItem = Functions.tokenNameRegexTest(mappedChars[2])
+    let parsedItem = core.functions.tokenNameRegexTest(mappedChars[2])
       ? "{" + parsedChars!.replace(/-/g, ".") + "}"
       : parsedChars!.replace(/;/g, "");
 

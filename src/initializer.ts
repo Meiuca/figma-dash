@@ -1,33 +1,37 @@
 import path from "path";
-import { path as pathToFigmaDash } from "figma-dash-core/dist/config-handler";
-import { tab } from "figma-dash-core/dist/functions";
 import chalk from "chalk";
 import figlet from "figlet";
+import { prompt } from "inquirer";
 import { existsSync, copyFileSync } from "fs";
-import { capitalize, upperCase } from "lodash";
-import packageJson from "../package.json";
+import FigmaDash from "./index";
 
-const pathToSrc = path.resolve(__dirname, "../defaults/user.config.js");
+export default async function (
+  args: import("../types/figma-dash").InitArgs = {}
+) {
+  let pathToSrc = path.resolve(__dirname, "../defaults/config.js");
+  let pathToDest = path.resolve(args.path || "./", "./figma-dash.config.js");
 
-const parsedName = packageJson.name.split(/-|[A-Z]/);
-const blockName = parsedName
-  .map((str, index) => upperCase(str) + "\n" + "  ".repeat(index + 1))
-  .join("");
-
-export default function (args: import("../types/figma-dash").InitArgs) {
-  if (!existsSync(pathToFigmaDash) || args.force) {
+  if (!existsSync(pathToDest) || args.force) {
     console.log(
-      chalk.bold.green(figlet.textSync(blockName, "JS Block Letters")),
-      `\n\n${tab((parsedName.length - 1) * 3)}Welcome\n\n`,
-      "Initialized with sample configuration"
+      chalk.bold.green(figlet.textSync("FIGMA DASH", "JS Block Letters")),
+      `\n\n\t\t\tWelcome\n\n`,
+      "Initialized with sample configuration\n\n"
     );
 
-    copyFileSync(pathToSrc, pathToFigmaDash);
+    copyFileSync(pathToSrc, pathToDest);
+
+    await prompt({
+      name: "pause",
+      message:
+        "Please take a look at your config file, change it according to your need, then come back here and hit enter",
+    });
   } else {
     console.log(
       "\n",
       chalk.greenBright("info"),
-      parsedName.map(capitalize).join(" ") + " config file already exists.\n"
+      "Figma Dash config file already exists.\n"
     );
   }
+
+  return new FigmaDash();
 }

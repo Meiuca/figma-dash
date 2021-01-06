@@ -13,6 +13,7 @@ commander.name(packageJson.name);
 commander
   .command("init")
   .option("-f, --force", descriptions.force)
+  .option("-p, --path <noquote>", descriptions.path)
   .description(descriptions.init)
   .action(actions.init);
 
@@ -41,6 +42,7 @@ commander
 commander
   .command("all")
   .option("-f, --force", descriptions.force)
+  .option("-p, --path <noquote>", descriptions.path)
   .option("-l, --link", descriptions.link)
   .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-m, --module <name>", descriptions.module)

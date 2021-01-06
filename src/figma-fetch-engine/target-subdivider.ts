@@ -1,12 +1,9 @@
 import { writeFileSync, existsSync, mkdirSync } from "fs";
-import { Functions, ConfigHandler } from "figma-dash-core";
+import FigmaDashCore from "figma-dash-core";
 import lodash from "lodash";
 import prettier from "prettier";
 import path from "path";
-
 import { Target, Entry, Meta } from "../../types";
-
-const config = ConfigHandler.handle();
 
 function subdivide(item: Entry, parentOut: string, output: Meta[]) {
   Object.entries(item[1]).forEach((subItem) => {
@@ -32,14 +29,16 @@ function subdivide(item: Entry, parentOut: string, output: Meta[]) {
   });
 }
 
-export default function (target: Target, output: Meta[]) {
-  Object.entries(target).forEach((item) => {
-    let clearOutFolderPath = Functions.cleanStr(item[0]);
+export default function (target: Target, output: Meta[], core: FigmaDashCore) {
+  const {
+    config: { figma },
+    functions: { cleanStr },
+  } = core;
 
-    let parentOut = path.resolve(
-      config.figma.output,
-      "./" + clearOutFolderPath
-    );
+  Object.entries(target).forEach((item) => {
+    let clearOutFolderPath = cleanStr(item[0]);
+
+    let parentOut = path.resolve(figma.output, "./" + clearOutFolderPath);
 
     if (!existsSync(parentOut)) mkdirSync(parentOut, { recursive: true });
 

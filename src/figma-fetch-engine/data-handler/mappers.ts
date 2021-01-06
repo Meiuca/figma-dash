@@ -1,6 +1,7 @@
-import { Functions } from "figma-dash-core";
+import FigmaDashCore from "figma-dash-core";
+import { Functions } from "figma-dash-core/dist/functions";
 import lodash from "lodash";
-import { handleComponentValue } from "./component-value-handler";
+import handleComponentValue from "./component-value-handler";
 
 import {
   TokenNameEntry,
@@ -12,14 +13,6 @@ import {
   TargetData,
 } from "../../../types";
 
-const {
-  depth,
-  cleanTokenValue,
-  tokenValueRegexTest,
-  parentContainerTokenRegexTest,
-  childContainerTokenRegexTest,
-} = Functions;
-
 function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
   prev = typeof prev == "object" ? Object.values(prev)[0]!.value : prev;
 
@@ -28,34 +21,38 @@ function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
   return prev + (prev == "" ? "" : " ") + curr;
 }
 
-export function mapTokenValues(child: FigmaComponent): MapTokenValueReturn {
-  if (parentContainerTokenRegexTest(child.name) && child.children) {
+function mapTokenValues(
+  this: Functions,
+  child: FigmaComponent
+): MapTokenValueReturn {
+  if (this.parentContainerTokenRegexTest(child.name) && child.children) {
     return child.children
-      .filter(({ name }) => childContainerTokenRegexTest(name))
+      .filter(({ name }) => this.childContainerTokenRegexTest(name))
       .map((nestedChild) => {
         {
           let tokenName = nestedChild.children?.find(
-            (tokenValue) => !tokenValueRegexTest(tokenValue.name)
+            (tokenValue) => !this.tokenValueRegexTest(tokenValue.name)
           );
 
           let token = nestedChild.children?.find((tokenValue) =>
-            tokenValueRegexTest(tokenValue.name)
+            this.tokenValueRegexTest(tokenValue.name)
           );
 
           return [
             tokenName!.name.toLowerCase(),
-            token ? cleanTokenValue(token.name) : "not found",
+            token ? this.cleanTokenValue(token.name) : "not found",
           ];
         }
       });
   } else {
-    let cleanStr = cleanTokenValue(child.name);
+    let cleanStr = this.cleanTokenValue(child.name);
 
     return Object.assign(cleanStr, { chars: child.characters || "" });
   }
 }
 
-export function mapTokens(
+function mapTokens(
+  this: FigmaDashCore & Functions,
   tokenNames: string[][],
   mappedTokenValues: MapTokenValueReturn[]
 ) {
@@ -63,11 +60,11 @@ export function mapTokens(
     let objToBeReduced: TargetData;
 
     let attributes = {
-      category: tokenNames.flat(depth(tokenNames))[0] as string,
-      type: tokenNames.flat(depth(tokenNames))[1] as string,
+      category: tokenNames.flat(this.depth(tokenNames))[0] as string,
+      type: tokenNames.flat(this.depth(tokenNames))[1] as string,
     };
 
-    if (depth(mappedTokenValues[index] as any[]) > 1) {
+    if (this.depth(mappedTokenValues[index] as any[]) > 1) {
       let entriesFromTokenValues = (mappedTokenValues[
         index
       ] as StringTupleArray).map((value) => ({
@@ -76,7 +73,7 @@ export function mapTokens(
 
       entriesFromTokenValues.push({
         stack: {
-          value: entriesFromTokenValues.reduce(reduceEntries, "") as string,
+          value: entriesFromTokenValues.reduce(reduceEntries, ""),
           attributes,
         },
       });
@@ -86,7 +83,8 @@ export function mapTokens(
       objToBeReduced = {
         value: handleComponentValue(
           mappedTokenValues[index] as SignedString,
-          attributes
+          attributes,
+          this
         ),
         attributes,
       };
@@ -99,4 +97,19 @@ export function mapTokens(
         objToBeReduced
       ) as unknown) as Target;
   };
+}
+
+export default function init(core: FigmaDashCore) {
+  return {
+    mapTokenValues: mapTokenValues.bind(core.functions),
+    mapTokens: mapTokens.bind({ ...core, ...core.functions }),
+  };
+}
+
+export interface Mappers {
+  mapTokenValues: (child: FigmaComponent) => MapTokenValueReturn;
+  mapTokens: (
+    tokenNames: string[][],
+    mappedTokenValues: MapTokenValueReturn[]
+  ) => (prop: string[], index: number) => Target;
 }

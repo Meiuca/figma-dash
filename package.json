@@ -8,19 +8,13 @@
   "bin": {
     "figma-dash": "cli.js"
   },
-  "scripts": {
-    "postinstall": "node ../figma-dash-core/tsc"
-  },
-  "main": "actions.js",
-  "types": "types/figma-dash.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "dist",
-    "src",
     "defaults",
     "cli.js",
     "actions.js",
-    "types",
-    "tsconfig.json"
+    "types"
   ],
   "keywords": [
     "style-dictionary",
@@ -34,13 +28,14 @@
   "devDependencies": {
     "@types/css": "^0.0.31",
     "@types/figlet": "^1.2.1",
+    "@types/inquirer": "^7.3.1",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.14",
     "@types/prettier": "^2.1.5",
     "typescript": "^4.1.3"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
     "commander": "^6.2.0",
     "figlet": "^1.5.0",
