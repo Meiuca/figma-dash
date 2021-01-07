@@ -2,12 +2,15 @@ import path from "path";
 import chalk from "chalk";
 import figlet from "figlet";
 import { prompt } from "inquirer";
-import { existsSync, copyFileSync } from "fs";
+import { existsSync, copyFileSync, mkdirSync } from "fs";
 import FigmaDash from "./index";
 
 export default async function (
   args: import("../types/figma-dash").InitArgs = {}
 ) {
+  if (args.path && !existsSync(args.path))
+    mkdirSync(args.path, { recursive: true });
+
   let pathToSrc = path.resolve(__dirname, "../defaults/config.js");
   let pathToDest = path.resolve(args.path || "./", "./figma-dash.config.js");
 
@@ -32,6 +35,8 @@ export default async function (
       "Figma Dash config file already exists.\n"
     );
   }
+
+  if (args.path) process.chdir(args.path);
 
   return new FigmaDash();
 }

@@ -10,19 +10,25 @@ const inquirer_1 = require("inquirer");
 const fs_1 = require("fs");
 const index_1 = __importDefault(require("./index"));
 async function default_1(args = {}) {
+    if (args.path && !fs_1.existsSync(args.path))
+        fs_1.mkdirSync(args.path, { recursive: true });
     let pathToSrc = path_1.default.resolve(__dirname, "../defaults/config.js");
     let pathToDest = path_1.default.resolve(args.path || "./", "./figma-dash.config.js");
     if (!fs_1.existsSync(pathToDest) || args.force) {
-        console.log(chalk_1.default.bold.green(figlet_1.default.textSync("FIGMA DASH", "JS Block Letters")), `\n\n\t\t\tWelcome\n\n`, "Initialized with sample configuration");
+        console.log(chalk_1.default.bold.green(figlet_1.default.textSync("FIGMA DASH", "JS Block Letters")), `\n\n\t\t\tWelcome\n\n`, "Initialized with sample configuration\n\n");
         fs_1.copyFileSync(pathToSrc, pathToDest);
         await inquirer_1.prompt({
             name: "pause",
-            message: "\n\nPlease take a look at your config file, change it according to your need, then come back here and hit enter",
+            message: "Please take a look at your config file, change it according to your need, then come back here and hit enter",
         });
     }
     else {
         console.log("\n", chalk_1.default.greenBright("info"), "Figma Dash config file already exists.\n");
     }
-    return new index_1.default();
+    if (args.path)
+        process.chdir(args.path);
+    const fd = new index_1.default();
+    console.log(fd.core.path);
+    return fd;
 }
 exports.default = default_1;

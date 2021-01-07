@@ -38,7 +38,7 @@ export default function (target: Target, output: Meta[], core: FigmaDashCore) {
   Object.entries(target).forEach((item) => {
     let clearOutFolderPath = cleanStr(item[0]);
 
-    let parentOut = path.resolve(figma.output, "./" + clearOutFolderPath);
+    let parentOut = path.resolve(figma.output, `./${clearOutFolderPath}`);
 
     if (!existsSync(parentOut)) mkdirSync(parentOut, { recursive: true });
 

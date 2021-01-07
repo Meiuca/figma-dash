@@ -23,7 +23,7 @@ function default_1(target, output, core) {
     const { config: { figma }, functions: { cleanStr }, } = core;
     Object.entries(target).forEach((item) => {
         let clearOutFolderPath = cleanStr(item[0]);
-        let parentOut = path_1.default.resolve(figma.output, "./" + clearOutFolderPath);
+        let parentOut = path_1.default.resolve(figma.output, `./${clearOutFolderPath}`);
         if (!fs_1.existsSync(parentOut))
             fs_1.mkdirSync(parentOut, { recursive: true });
         subdivide(item, parentOut, output);

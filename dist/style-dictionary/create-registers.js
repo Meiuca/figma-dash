@@ -22,34 +22,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const style_dictionary_1 = __importDefault(require("style-dictionary"));
 const cssFormatBlock = __importStar(require("./component-format-block/css"));
 const scssFormatBlock = __importStar(require("./component-format-block/scss"));
 const react_native_transformer_1 = __importDefault(require("./react-native-transformer"));
-function createRegisters(core) {
-    style_dictionary_1.default.registerTransform({
+function createRegisters(dictionary, core) {
+    dictionary.registerTransform({
         name: "size/object",
         type: "value",
         matcher: (prop) => prop.attributes.category === "size",
         transformer: react_native_transformer_1.default,
     });
-    style_dictionary_1.default.registerTransformGroup({
+    dictionary.registerTransformGroup({
         name: "native",
         transforms: ["name/cti/camel", "size/object", "color/css"],
     });
-    style_dictionary_1.default.registerTransformGroup({
+    dictionary.registerTransformGroup({
         name: "default",
         transforms: ["name/cti/kebab"],
     });
-    style_dictionary_1.default.registerFormat({
+    dictionary.registerFormat({
         ...cssFormatBlock,
         formatter: cssFormatBlock.formatter.bind(core),
     });
-    style_dictionary_1.default.registerFormat({
+    dictionary.registerFormat({
         ...scssFormatBlock,
         formatter: scssFormatBlock.formatter.bind(core),
     });
-    style_dictionary_1.default.registerFilter({
+    dictionary.registerFilter({
         name: "isNotComponent",
         matcher: function (prop) {
             return prop.attributes.category !== (core.config.ds || "component");

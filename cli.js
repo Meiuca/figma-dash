@@ -2,7 +2,6 @@
 
 const commander = require("commander");
 const packageJson = require("./package.json");
-
 const descriptions = require("./dist/descriptions");
 const actions = require("./actions");
 

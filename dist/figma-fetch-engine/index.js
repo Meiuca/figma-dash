@@ -11,6 +11,7 @@ const data_handler_1 = __importDefault(require("./data-handler"));
 const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const target_subdivider_1 = __importDefault(require("./target-subdivider"));
+const figma_dash_core_1 = __importDefault(require("figma-dash-core"));
 async function default_1(args = {}) {
     let figmaUrl = "";
     const { core: { config: { figma }, validations: { validateFigmaConfig }, }, } = this;
@@ -39,8 +40,7 @@ async function default_1(args = {}) {
         }));
     }
     catch (err) {
-        console.log(err);
-        process.exit(1);
+        throw new figma_dash_core_1.default.FigmaDashError(err, `error thrown when fetching ${figmaUrl}`);
     }
     console.log("\n", chalk_1.default.greenBright("info"), "Tokens successfully imported");
     if (args.convert)

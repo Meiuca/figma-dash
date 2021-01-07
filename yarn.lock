@@ -159,7 +159,7 @@ figlet@^1.5.0:
 
 "figma-dash-core@https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git#ts":
   version "1.0.0"
-  resolved "https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git#001b98d5c67a784b8eabe773087c95f0c849cf48"
+  resolved "https://levi-pires:levi7328@github.com/Meiuca/figma-dash-core.git#d3a8d1fbdf67dd16422416bf2023a47e07ca3e2a"
   dependencies:
     chalk "^4.1.0"
     lodash "^4.17.20"

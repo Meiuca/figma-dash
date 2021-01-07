@@ -4,11 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const style_dictionary_1 = __importDefault(require("style-dictionary"));
+const figma_dash_core_1 = __importDefault(require("figma-dash-core"));
 const files_selector_1 = __importDefault(require("./files-selector"));
 const lodash_1 = __importDefault(require("lodash"));
 const create_registers_1 = __importDefault(require("./create-registers"));
 function runStyleDictionary(meta, module, moduleConfig, core) {
-    create_registers_1.default(core);
+    create_registers_1.default(style_dictionary_1.default, core);
     let filterFn = (file) => file.include;
     try {
         meta.forEach(({ src, filename }) => {
@@ -35,7 +36,7 @@ function runStyleDictionary(meta, module, moduleConfig, core) {
         });
     }
     catch (err) {
-        core.exceptionHandler(err, "Exception thrown while handling module: " + module);
+        throw new figma_dash_core_1.default.FigmaDashError(err, `Exception thrown while handling module: ${module}`);
     }
 }
 exports.default = runStyleDictionary;

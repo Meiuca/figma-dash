@@ -99,7 +99,7 @@ function mapTokens(
   };
 }
 
-export default function init(core: FigmaDashCore) {
+export default function init(core: FigmaDashCore): Mappers {
   return {
     mapTokenValues: mapTokenValues.bind(core.functions),
     mapTokens: mapTokens.bind({ ...core, ...core.functions }),

@@ -16,6 +16,9 @@
     "actions.js",
     "types"
   ],
+  "scripts": {
+    "run-tsc": "rm -r dist && yarn tsc"
+  },
   "keywords": [
     "style-dictionary",
     "ds",

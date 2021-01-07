@@ -33,9 +33,7 @@ function parseComponentProps(component) {
         outArray.push(toPush);
     }
     else {
-        console.warn(chalk_1.default.yellowBright("\nwarn"), `Ignoring ${tokenNames
-            .map((name) => name.join("-"))
-            .join()} because it's values doesn't follow the specified rules`);
+        console.warn(chalk_1.default.yellowBright("\nwarn"), "Ignoring", tokenNames.map((name) => name.join("-")).join(), "because it's values doesn't follow the specified rules");
     }
 }
 function getOutArray() {

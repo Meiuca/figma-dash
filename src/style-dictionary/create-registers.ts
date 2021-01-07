@@ -4,33 +4,38 @@ import * as cssFormatBlock from "./component-format-block/css";
 import * as scssFormatBlock from "./component-format-block/scss";
 import transformer from "./react-native-transformer";
 
-export default function createRegisters(core: FigmaDashCore) {
-  StyleDictionary.registerTransform({
+export default function createRegisters(
+  dictionary: StyleDictionary,
+  core: FigmaDashCore
+) {
+  dictionary.registerTransform({
     name: "size/object",
     type: "value",
     matcher: (prop) => prop.attributes.category === "size",
     transformer,
   });
 
-  StyleDictionary.registerTransformGroup({
+  dictionary.registerTransformGroup({
     name: "native",
     transforms: ["name/cti/camel", "size/object", "color/css"],
   });
 
-  StyleDictionary.registerTransformGroup({
+  dictionary.registerTransformGroup({
     name: "default",
     transforms: ["name/cti/kebab"],
   });
 
-  StyleDictionary.registerFormat({
+  dictionary.registerFormat({
     ...cssFormatBlock,
     formatter: cssFormatBlock.formatter.bind(core),
   });
-  StyleDictionary.registerFormat({
+
+  dictionary.registerFormat({
     ...scssFormatBlock,
     formatter: scssFormatBlock.formatter.bind(core),
   });
-  StyleDictionary.registerFilter({
+
+  dictionary.registerFilter({
     name: "isNotComponent",
     matcher: function (prop) {
       return prop.attributes.category !== (core.config.ds || "component");

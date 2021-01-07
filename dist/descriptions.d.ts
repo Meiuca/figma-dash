@@ -1,4 +1,4 @@
-export declare const path = "The path where the config file will be placed. If ommited the system will resolve to your cwd";
+export declare const path = "The path where the config file will be placed. If ommited the system will resolve to the cwd";
 export declare const convert = "Convert style tokens";
 export declare const link = "Download and link fonts";
 export declare const init: string;

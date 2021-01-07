@@ -12,7 +12,7 @@ export default function runStyleDictionary(
   moduleConfig: FigmaDashModule,
   core: FigmaDashCore
 ) {
-  createRegisters(core);
+  createRegisters(StyleDictionary, core);
 
   let filterFn = (file: File) => file.include;
 
@@ -46,9 +46,9 @@ export default function runStyleDictionary(
       });
     });
   } catch (err) {
-    core.exceptionHandler(
+    throw new FigmaDashCore.FigmaDashError(
       err,
-      "Exception thrown while handling module: " + module
+      `Exception thrown while handling module: ${module}`
     );
   }
 }

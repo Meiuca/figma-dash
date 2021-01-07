@@ -8,6 +8,7 @@ import chalk from "chalk";
 import subdivideTarget from "./target-subdivider";
 import FigmaDash from "../index";
 import { Target } from "../../types";
+import FigmaDashCore from "figma-dash-core";
 
 export default async function (
   this: FigmaDash,
@@ -76,9 +77,10 @@ export default async function (
       })
     );
   } catch (err) {
-    console.log(err);
-    process.exit(1);
-    // this.core.exceptionHandler(err, `error thrown when fetching ${figmaUrl}`);
+    throw new FigmaDashCore.FigmaDashError(
+      err,
+      `error thrown when fetching ${figmaUrl}`
+    );
   }
 
   console.log("\n", chalk.greenBright("info"), "Tokens successfully imported");

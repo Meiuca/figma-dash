@@ -50,9 +50,9 @@ function parseComponentProps(
   } else {
     console.warn(
       chalk.yellowBright("\nwarn"),
-      `Ignoring ${tokenNames
-        .map((name) => name.join("-"))
-        .join()} because it's values doesn't follow the specified rules`
+      "Ignoring",
+      tokenNames.map((name) => name.join("-")).join(),
+      "because it's values doesn't follow the specified rules"
     );
   }
 }
