@@ -1,0 +1,21 @@
+:root {
+ --size-bradius-sm: 8px;
+ --color-brand-primary-1: #EFE2FE;
+ --color-brand-primary-4: #41067F;
+ --size-bradius-md: 16px;
+}
+
+.jota-test-component-1 {
+ border-radius: var(--size-bradius-sm);
+ background-color: var(--color-brand-primary-1);
+ color: var(--color-brand-primary-4);
+ height: 100px;
+ width: 200px;
+ font-size: 30px;
+}
+
+.jota-test-component-1:hover {
+ border-radius: var(--size-bradius-md);
+ background-color: var(--color-brand-primary-4);
+ color: var(--color-brand-primary-1);
+}

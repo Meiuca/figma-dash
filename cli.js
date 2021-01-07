@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+"use strict";
+
 const commander = require("commander");
 const packageJson = require("./package.json");
 const descriptions = require("./dist/descriptions");
@@ -50,4 +52,7 @@ commander
 
 console.log(packageJson.name + " v" + packageJson.version);
 
-commander.parse(process.argv);
+commander.parseAsync().catch((err) => {
+  console.log(`${err.name}\n${err.stack}`);
+  process.exit(1);
+});

@@ -27,8 +27,6 @@ async function default_1(args = {}) {
     }
     if (args.path)
         process.chdir(args.path);
-    const fd = new index_1.default();
-    console.log(fd.core.path);
-    return fd;
+    return new index_1.default();
 }
 exports.default = default_1;

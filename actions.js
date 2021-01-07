@@ -1,3 +1,5 @@
+"use strict";
+
 const FigmaDash = require("./dist").default;
 
 const init = async (args = {}) => {
@@ -21,7 +23,7 @@ const doAll = async (args = {}) => {
 
   await fd.importFromFigma({ ...args, convert: true });
 
-  if (args.link) await linkFonts();
+  if (args.link) await require("figma-dash-fonts").default(fd.core);
 };
 
 module.exports = {
