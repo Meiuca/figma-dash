@@ -1,27 +1,35 @@
-exports.init = (args = {}) => {
-  require("./src/initializer")(args);
+"use strict";
+
+const FigmaDash = require("./dist").default;
+
+const init = async (args = {}) => {
+  return await FigmaDash.init(args);
 };
 
-exports.importFromFigma = async (args = {}) => {
-  await require("./src/figma-fetch-engine")(args);
-
-  if (args.convert) {
-    exports.convertTokens(args);
-  }
+const importFromFigma = async (args = {}) => {
+  await new FigmaDash().importFromFigma(args);
 };
 
-exports.convertTokens = (args = {}) => {
-  require("./src/converter")(args);
+const convertTokens = (args = {}) => {
+  new FigmaDash().convertTokens(args);
 };
 
-exports.linkFonts = async () => {
-  await require("figma-dash-fonts")();
+const linkFonts = async () => {
+  await require("figma-dash-fonts").default();
 };
 
-exports.doAll = async (args = {}) => {
-  exports.init(args);
+const doAll = async (args = {}) => {
+  let fd = await init(args);
 
-  await exports.importFromFigma({ ...args, convert: true });
+  await fd.importFromFigma({ ...args, convert: true });
 
-  if (args.link) await exports.linkFonts();
+  if (args.link) await require("figma-dash-fonts").default(fd.core);
+};
+
+module.exports = {
+  init,
+  importFromFigma,
+  linkFonts,
+  doAll,
+  convertTokens,
 };

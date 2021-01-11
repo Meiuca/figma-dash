@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
+"use strict";
+
 const commander = require("commander");
 const packageJson = require("./package.json");
-
-const descriptions = require("./src/descriptions");
+const descriptions = require("./dist/descriptions");
 const actions = require("./actions");
 
 commander.version(packageJson.version);
@@ -13,6 +14,7 @@ commander.name(packageJson.name);
 commander
   .command("init")
   .option("-f, --force", descriptions.force)
+  .option("-p, --path <path>", descriptions.path)
   .description(descriptions.init)
   .action(actions.init);
 
@@ -21,7 +23,7 @@ commander
   .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-c, --convert", descriptions.postImport)
   .option("-m, --module <name>", descriptions.module)
-  .description(descriptions.import)
+  .description(descriptions.imports)
   .action(actions.importFromFigma)
   .alias("import");
 
@@ -41,6 +43,7 @@ commander
 commander
   .command("all")
   .option("-f, --force", descriptions.force)
+  .option("-p, --path <noquote>", descriptions.path)
   .option("-l, --link", descriptions.link)
   .option("-t, --no-separated-tokens", descriptions.noSeparatedTokens)
   .option("-m, --module <name>", descriptions.module)
@@ -49,4 +52,7 @@ commander
 
 console.log(packageJson.name + " v" + packageJson.version);
 
-commander.parse(process.argv);
+commander.parseAsync().catch((err) => {
+  console.log(`${err.name}\n${err.stack}`);
+  process.exit(1);
+});

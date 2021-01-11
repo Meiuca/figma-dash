@@ -1,0 +1,10 @@
+export declare const path = "The path where the config file will be placed. If ommited the system will resolve to the cwd";
+export declare const convert = "Convert style tokens";
+export declare const link = "Download and link fonts";
+export declare const init: string;
+export declare const force = "Can be used to reset the configuration";
+export declare const module = "Handle a specific module";
+export declare const imports = "Generate tokens from Figma";
+export declare const postImport = "Convert tokens after import";
+export declare const all = "Execute all commands";
+export declare const noSeparatedTokens = "If this flag is set the api will not generate separated files for each category and item";

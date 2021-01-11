@@ -1,0 +1,19 @@
+$bradius-size-sm: 8px;
+$brand-color-primary-1: #EFE2FE;
+$brand-color-primary-4: #41067F;
+$bradius-size-md: 16px;
+
+.test-jota-component-1 {
+ border-radius: $bradius-size-sm;
+ background-color: $brand-color-primary-1;
+ color: $brand-color-primary-4;
+ height: 100px;
+ width: 200px;
+ font-size: 30px;
+}
+
+.test-jota-component-1:hover {
+ border-radius: $bradius-size-md;
+ background-color: $brand-color-primary-4;
+ color: $brand-color-primary-1;
+}
