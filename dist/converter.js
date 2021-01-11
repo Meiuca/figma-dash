@@ -6,12 +6,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const style_dictionary_1 = __importDefault(require("./style-dictionary"));
-const excludedObjects = ["fonts", "figma", "patterns", "ds"];
+const figma_dash_core_1 = require("figma-dash-core");
+const excludedObjects = ["fonts", "figma", "patterns", "globals"];
 function log(module, meta, core) {
     if (excludedObjects.includes(module))
         return;
+    let moduleInfo = core.config[module];
+    if (!moduleInfo)
+        throw new figma_dash_core_1.FigmaDashError(`module ${module} does not exist`);
     console.log("\n", chalk_1.default.greenBright("info"), "Converting module:", module);
-    style_dictionary_1.default(meta, module, core.config[module], core);
+    style_dictionary_1.default(meta, module, moduleInfo, core);
 }
 function default_1(args = {}) {
     let meta = require(path_1.default.resolve(this.core.config.figma.output, "./meta.json"));

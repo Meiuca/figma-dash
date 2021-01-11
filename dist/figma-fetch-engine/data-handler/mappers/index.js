@@ -1,15 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const lodash_1 = __importDefault(require("lodash"));
-const component_value_handler_1 = __importDefault(require("./component-value-handler"));
+exports.reduceEntries = void 0;
+const mapped_token_values_handler_1 = require("./mapped-token-values-handler");
 function reduceEntries(prev, curr) {
     prev = typeof prev == "object" ? Object.values(prev)[0].value : prev;
     curr = typeof curr == "object" ? Object.values(curr)[0].value : curr;
     return prev + (prev == "" ? "" : " ") + curr;
 }
+exports.reduceEntries = reduceEntries;
 function mapTokenValues(child) {
     if (this.parentContainerTokenRegexTest(child.name) && child.children) {
         return child.children
@@ -32,29 +30,22 @@ function mapTokenValues(child) {
 }
 function mapTokens(tokenNames, mappedTokenValues) {
     return (prop, index) => {
-        let objToBeReduced;
-        let attributes = {
-            category: tokenNames.flat(this.depth(tokenNames))[0],
-            type: tokenNames.flat(this.depth(tokenNames))[1],
-        };
-        if (this.depth(mappedTokenValues[index]) > 1) {
-            let entriesFromTokenValues = mappedTokenValues[index].map((value) => ({
-                [value[0]]: { value: value[1], attributes },
-            }));
-            entriesFromTokenValues.push({
-                stack: {
-                    value: entriesFromTokenValues.reduce(reduceEntries, ""),
-                    attributes,
-                },
-            });
-            objToBeReduced = lodash_1.default.merge({}, ...entriesFromTokenValues);
+        let attributes;
+        switch (this.config.globals.tokenNameModel) {
+            case "inverted":
+                attributes = {
+                    category: tokenNames.flat(this.depth(tokenNames))[0],
+                    type: tokenNames.flat(this.depth(tokenNames))[1],
+                };
+                break;
+            default:
+                attributes = {
+                    type: tokenNames.flat(this.depth(tokenNames))[0],
+                    category: tokenNames.flat(this.depth(tokenNames))[1],
+                };
+                break;
         }
-        else {
-            objToBeReduced = {
-                value: component_value_handler_1.default(mappedTokenValues[index], attributes, this),
-                attributes,
-            };
-        }
+        let objToBeReduced = this.handleMappedTokenValues(mappedTokenValues, index, attributes);
         return prop
             .reverse()
             .reduce((prev, curr) => ({ [curr]: prev }), objToBeReduced);
@@ -63,7 +54,11 @@ function mapTokens(tokenNames, mappedTokenValues) {
 function init(core) {
     return {
         mapTokenValues: mapTokenValues.bind(core.functions),
-        mapTokens: mapTokens.bind({ ...core, ...core.functions }),
+        mapTokens: mapTokens.bind({
+            ...core,
+            ...core.functions,
+            handleMappedTokenValues: mapped_token_values_handler_1.handleMappedTokenValues,
+        }),
     };
 }
 exports.default = init;

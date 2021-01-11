@@ -2,25 +2,38 @@
 require("dotenv").config();
 
 module.exports = {
-  /* These are the default patterns
-   *   patterns: {
-   *     tokenNameIdentifier: /^\$/,
-   *     tokenValueIdentifier: /^#|^~|\d+(?=px|rem|em|%|\.\d+)/,
-   *     parentContainerTokenIdentifier: /^:{2}/,
-   *     childContainerTokenIdentifier: /^:{1}/,
-   *   },
-   */
+  globals: {
+    /**
+     * Your Design System identifier.
+     * Use only lowercase letters
+     */
+    ds: "jota",
 
-  /**
-   * Your Design System identifier.
-   * Use only lowercase letters
-   */
-  ds: "jota",
+    /**
+     * `classic` -> `type-category-id1-id2...`
+     *
+     * `inverted` -> `category-type-id1-id2...`
+     */
+    tokenNameModel: "classic",
+
+    // These are the default patterns
+    /* patterns: {
+      tokenNameIdentifier: /^\$/,
+      tokenValueIdentifier: /^#|^~|\d+(?=px|rem|em|%|\.\d+)/,
+      parentContainerTokenIdentifier: /^:{2}/,
+      childContainerTokenIdentifier: /^:{1}/,
+    }, */
+  },
 
   figma: {
     accessToken: process.env.FIGMA_ACCESS_TOKEN,
 
-    fileID: "aaaaaaaaaaaaaaaaaaaaaa",
+    /**
+     * `https://www.figma.com/file/aaaaaaaaaaa/`
+     *  or
+     *  `aaaaaaaaaaa`
+     */
+    src: "aaaaaaaaaaa",
 
     output: "tokens/",
   },

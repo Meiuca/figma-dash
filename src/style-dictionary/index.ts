@@ -1,6 +1,6 @@
 import StyleDictionary from "style-dictionary";
 import { FigmaDashModule } from "figma-dash-core/dist/config-handler";
-import FigmaDashCore from "figma-dash-core";
+import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
 import filesSelector from "./files-selector";
 import lodash from "lodash";
 import { File, Meta } from "../../types";
@@ -26,7 +26,7 @@ export default function runStyleDictionary(
         let mappedInclude = [file].filter(filterFn).map(filterFn) as string[];
 
         if (
-          src.includes(core.config.ds || "undefined") &&
+          src.includes(core.config.globals.ds || "undefined") &&
           mappedInclude.length == 0
         ) {
           return;
@@ -46,7 +46,7 @@ export default function runStyleDictionary(
       });
     });
   } catch (err) {
-    throw new FigmaDashCore.FigmaDashError(
+    throw new FigmaDashError(
       err,
       `Exception thrown while handling module: ${module}`
     );

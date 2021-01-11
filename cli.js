@@ -14,7 +14,7 @@ commander.name(packageJson.name);
 commander
   .command("init")
   .option("-f, --force", descriptions.force)
-  .option("-p, --path <noquote>", descriptions.path)
+  .option("-p, --path <path>", descriptions.path)
   .description(descriptions.init)
   .action(actions.init);
 

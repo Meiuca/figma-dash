@@ -1,9 +1,12 @@
 module.exports = {
-  ds: "jota",
+  globals: {
+    ds: "jota",
+    // tokenNameModel: "inverted",
+  },
 
   figma: {
     accessToken: "142385-65617358-2a56-4c81-8fe6-44dc301b7976",
-    fileID: "irh24FKBf9HYTKyt1MqVea",
+    src: "irh24FKBf9HYTKyt1MqVea",
     output: "tokens/",
   },
 
@@ -22,9 +25,17 @@ module.exports = {
     tokens: {
       output: {
         dir: "src/styles/web/jota/",
-        extension: ".css",
-        format: "css/components",
       },
+      files: [
+        {
+          destination: "{f}.css",
+          format: "css/components",
+        },
+        {
+          destination: "{f}.scss",
+          format: "scss/components",
+        },
+      ],
     },
   },
 

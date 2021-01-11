@@ -1,13 +1,17 @@
 import FigmaDashCore from "figma-dash-core";
 
-import { ComponentProps, SignedString, StyleAttributes } from "../../../types";
+import {
+  ComponentProps,
+  SignedString,
+  StyleAttributes,
+} from "../../../../types";
 
 export default function (
   tokenValue: SignedString,
   attributes: StyleAttributes,
   core: FigmaDashCore
 ) {
-  if (!tokenValue.chars || attributes.category !== core.config.ds)
+  if (!tokenValue.chars || attributes.category !== core.config.globals.ds)
     return tokenValue;
 
   let componentPropsRegExp = /(.+):(.+)(?:;|\n|$)/;

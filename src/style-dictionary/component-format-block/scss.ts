@@ -29,7 +29,7 @@ export function formatter(
   };
 
   dictionary.allProperties.forEach((prop) => {
-    if (prop.attributes.category === (this.config.ds || "component")) {
+    if (prop.attributes.category === (this.config.globals.ds || "component")) {
       components.push(
         `.${prop.path?.join("-")} {\n ${prop.value
           .map(mapValue)

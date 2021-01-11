@@ -51,7 +51,7 @@ function createRegisters(dictionary, core) {
     dictionary.registerFilter({
         name: "isNotComponent",
         matcher: function (prop) {
-            return prop.attributes.category !== (core.config.ds || "component");
+            return (prop.attributes.category !== (core.config.globals.ds || "component"));
         },
     });
 }

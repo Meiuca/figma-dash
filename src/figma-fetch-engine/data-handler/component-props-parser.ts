@@ -44,7 +44,7 @@ function parseComponentProps(
 
     let toPush = out
       .flat(this.depth(out))
-      .reduce((prev, curr) => lodash.merge(prev, curr), {}) as Target;
+      .reduce((prev, curr) => lodash.merge(prev, curr), {});
 
     outArray.push(toPush);
   } else {

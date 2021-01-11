@@ -8,17 +8,18 @@ import chalk from "chalk";
 import subdivideTarget from "./target-subdivider";
 import FigmaDash from "../index";
 import { Target } from "../../types";
-import FigmaDashCore from "figma-dash-core";
+import { FigmaDashError } from "figma-dash-core";
 
 export default async function (
   this: FigmaDash,
   args: import("../../types/figma-dash").ImportArgs = {}
 ) {
-  let figmaUrl = "";
+  let figmaUrl: string | null = "";
 
   const {
     core: {
       config: { figma },
+      functions: { parseFigmaSrc },
       validations: { validateFigmaConfig },
     },
   } = this;
@@ -26,18 +27,28 @@ export default async function (
   try {
     validateFigmaConfig();
 
+    let fileID = parseFigmaSrc(figma.src);
+
+    if (!fileID) {
+      figmaUrl = null;
+
+      throw new Error(
+        `Figma File ID was not parsed correctly. Input: ${figma.src}`
+      );
+    }
+
     console.log(
       "\n",
       chalk.greenBright("info"),
       "Importing from ID",
-      chalk.gray(figma.fileID),
+      chalk.gray(fileID),
       "with access token",
       chalk.gray(figma.accessToken),
       "to",
       chalk.gray(path.resolve(figma.output))
     );
 
-    figmaUrl = "https://api.figma.com/v1/files/" + figma.fileID;
+    figmaUrl = "https://api.figma.com/v1/files/" + fileID;
 
     let { data } = await axios.get(
       figmaUrl,
@@ -77,10 +88,7 @@ export default async function (
       })
     );
   } catch (err) {
-    throw new FigmaDashCore.FigmaDashError(
-      err,
-      `error thrown when fetching ${figmaUrl}`
-    );
+    throw new FigmaDashError(err, `error thrown when fetching ${figmaUrl}`);
   }
 
   console.log("\n", chalk.greenBright("info"), "Tokens successfully imported");

@@ -1,5 +1,6 @@
 import FigmaDashCore from "figma-dash-core";
-import { FigmaComponent, MapTokenValueReturn, Target } from "../../../types";
+import { TokenNameEntry, FigmaComponent, MapTokenValueReturn, Target } from "../../../../types";
+export declare function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry): string;
 export default function init(core: FigmaDashCore): Mappers;
 export interface Mappers {
     mapTokenValues: (child: FigmaComponent) => MapTokenValueReturn;

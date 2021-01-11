@@ -38,7 +38,9 @@ export default function createRegisters(
   dictionary.registerFilter({
     name: "isNotComponent",
     matcher: function (prop) {
-      return prop.attributes.category !== (core.config.ds || "component");
+      return (
+        prop.attributes.category !== (core.config.globals.ds || "component")
+      );
     },
   });
 }
