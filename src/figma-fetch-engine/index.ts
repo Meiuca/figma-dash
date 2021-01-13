@@ -6,13 +6,13 @@ import handleChildren from "./data-handler";
 import path from "path";
 import chalk from "chalk";
 import subdivideTarget from "./target-subdivider";
-import FigmaDash from "../index";
+import MeiucaEngine from "../index";
 import { Target } from "../../types";
-import { FigmaDashError } from "figma-dash-core";
+import { MeiucaEngineError } from "meiuca-engine-core";
 
 export default async function (
-  this: FigmaDash,
-  args: import("../../types/figma-dash").ImportArgs = {}
+  this: MeiucaEngine,
+  args: import("../../types/meiuca-engine").ImportArgs = {}
 ) {
   let figmaUrl: string | null = "";
 
@@ -88,7 +88,7 @@ export default async function (
       })
     );
   } catch (err) {
-    throw new FigmaDashError(err, `error thrown when fetching ${figmaUrl}`);
+    throw new MeiucaEngineError(err, `error thrown when fetching ${figmaUrl}`);
   }
 
   console.log("\n", chalk.greenBright("info"), "Tokens successfully imported");

@@ -22,18 +22,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const figma_dash_core_1 = __importDefault(require("figma-dash-core"));
+const meiuca_engine_core_1 = __importDefault(require("meiuca-engine-core"));
 const initializer_1 = __importDefault(require("./initializer"));
 const Descriptions = __importStar(require("./descriptions"));
 const converter_1 = __importDefault(require("./converter"));
 const figma_fetch_engine_1 = __importDefault(require("./figma-fetch-engine"));
-class FigmaDash {
+class MeiucaEngine {
     constructor(config) {
         this.convertTokens = converter_1.default;
         this.descriptions = Descriptions;
         this.importFromFigma = figma_fetch_engine_1.default;
-        this.core = new figma_dash_core_1.default(config);
+        this.core = new meiuca_engine_core_1.default(config);
     }
 }
-exports.default = FigmaDash;
-FigmaDash.init = initializer_1.default;
+exports.default = MeiucaEngine;
+MeiucaEngine.init = initializer_1.default;

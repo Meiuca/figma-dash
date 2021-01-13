@@ -1,12 +1,12 @@
 import StyleDictionary from "style-dictionary";
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 import * as cssFormatBlock from "./component-format-block/css";
 import * as scssFormatBlock from "./component-format-block/scss";
 import transformer from "./react-native-transformer";
 
 export default function createRegisters(
   dictionary: StyleDictionary,
-  core: FigmaDashCore
+  core: MeiucaEngineCore
 ) {
   dictionary.registerTransform({
     name: "size/object",

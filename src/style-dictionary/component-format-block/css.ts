@@ -1,4 +1,4 @@
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 
 import {
   TransformedComponent,
@@ -8,7 +8,7 @@ import {
 export const name = "css/components";
 
 export function formatter(
-  this: FigmaDashCore,
+  this: MeiucaEngineCore,
   dictionary: {
     allProperties: TransformedComponent[];
   }

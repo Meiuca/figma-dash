@@ -1,6 +1,6 @@
 import StyleDictionary from "style-dictionary";
-import { FigmaDashModule } from "figma-dash-core/dist/config-handler";
-import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
+import { MeiucaEngineModule } from "meiuca-engine-core/dist/config-handler";
+import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
 import filesSelector from "./files-selector";
 import lodash from "lodash";
 import { File, Meta } from "../../types";
@@ -9,8 +9,8 @@ import createRegisters from "./create-registers";
 export default function runStyleDictionary(
   meta: Meta[],
   module: string,
-  moduleConfig: FigmaDashModule,
-  core: FigmaDashCore
+  moduleConfig: MeiucaEngineModule,
+  core: MeiucaEngineCore
 ) {
   createRegisters(StyleDictionary, core);
 
@@ -46,7 +46,7 @@ export default function runStyleDictionary(
       });
     });
   } catch (err) {
-    throw new FigmaDashError(
+    throw new MeiucaEngineError(
       err,
       `Exception thrown while handling module: ${module}`
     );

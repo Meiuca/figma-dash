@@ -1,5 +1,5 @@
-import FigmaDashCore from "figma-dash-core";
-import { Functions } from "figma-dash-core/dist/functions";
+import MeiucaEngineCore from "meiuca-engine-core";
+import { Functions } from "meiuca-engine-core/dist/functions";
 import lodash from "lodash";
 import InitMappers, { Mappers } from "./mappers";
 import chalk from "chalk";
@@ -61,7 +61,7 @@ function getOutArray() {
   return outArray;
 }
 
-export default function init(core: FigmaDashCore) {
+export default function init(core: MeiucaEngineCore) {
   return {
     parseComponentProps: parseComponentProps.bind({
       ...core.functions,

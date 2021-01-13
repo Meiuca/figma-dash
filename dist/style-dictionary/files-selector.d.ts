@@ -1,2 +1,3 @@
+import { MeiucaEngineModule } from "meiuca-engine-core/dist/config-handler";
 import { File } from "../../types";
-export default function (config: import("figma-dash-core/dist/config-handler").FigmaDashModule, filename: string, group: string): File[];
+export default function (config: MeiucaEngineModule, filename: string, group: string): File[];

@@ -1,9 +1,10 @@
 import lodash from "lodash";
+import { MeiucaEngineModule } from "meiuca-engine-core/dist/config-handler";
 
 import { File } from "../../types";
 
 export default function (
-  config: import("figma-dash-core/dist/config-handler").FigmaDashModule,
+  config: MeiucaEngineModule,
   filename: string,
   group: string
 ): File[] {

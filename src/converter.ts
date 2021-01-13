@@ -1,18 +1,19 @@
 import path from "path";
 import chalk from "chalk";
 import runStyleDictionary from "./style-dictionary";
-import FigmaDash from "./index";
+import MeiucaEngine from "./index";
 import { Meta } from "../types";
-import FigmaDashCore, { FigmaDashError } from "figma-dash-core";
+import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
 
 const excludedObjects = ["fonts", "figma", "patterns", "globals"];
 
-function log(module: string, meta: Meta[], core: FigmaDashCore) {
+function log(module: string, meta: Meta[], core: MeiucaEngineCore) {
   if (excludedObjects.includes(module)) return;
 
   let moduleInfo = core.config[module];
 
-  if (!moduleInfo) throw new FigmaDashError(`module ${module} does not exist`);
+  if (!moduleInfo)
+    throw new MeiucaEngineError(`module ${module} does not exist`);
 
   console.log("\n", chalk.greenBright("info"), "Converting module:", module);
 
@@ -20,8 +21,8 @@ function log(module: string, meta: Meta[], core: FigmaDashCore) {
 }
 
 export default function (
-  this: FigmaDash,
-  args: import("../types/figma-dash").ConvertArgs = {}
+  this: MeiucaEngine,
+  args: import("../types/meiuca-engine").ConvertArgs = {}
 ) {
   let meta = require(path.resolve(
     this.core.config.figma.output,

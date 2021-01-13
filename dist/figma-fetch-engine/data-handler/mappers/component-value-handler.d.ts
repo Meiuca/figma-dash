@@ -1,3 +1,3 @@
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 import { ComponentProps, SignedString, StyleAttributes } from "../../../../types";
-export default function (tokenValue: SignedString, attributes: StyleAttributes, core: FigmaDashCore): SignedString | ComponentProps[];
+export default function (tokenValue: SignedString, attributes: StyleAttributes, core: MeiucaEngineCore): SignedString | ComponentProps[];

@@ -1,5 +1,5 @@
-import FigmaDashCore from "figma-dash-core";
-import { Functions } from "figma-dash-core/dist/functions";
+import MeiucaEngineCore from "meiuca-engine-core";
+import { Functions } from "meiuca-engine-core/dist/functions";
 import lodash from "lodash";
 import handleComponentValue from "./component-value-handler";
 import {
@@ -11,7 +11,7 @@ import {
 import { reduceEntries } from "./index";
 
 export function handleMappedTokenValues(
-  this: FigmaDashCore & Functions,
+  this: MeiucaEngineCore & Functions,
   mappedTokenValues: MapTokenValueReturn[],
   index: number,
   attributes: StyleAttributes

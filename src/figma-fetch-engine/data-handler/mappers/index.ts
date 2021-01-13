@@ -1,6 +1,6 @@
-import FigmaDashCore from "figma-dash-core";
-import { Functions } from "figma-dash-core/dist/functions";
-import { Globals } from "figma-dash-core/dist/config-handler";
+import MeiucaEngineCore from "meiuca-engine-core";
+import { Functions } from "meiuca-engine-core/dist/functions";
+import { Globals } from "meiuca-engine-core/dist/config-handler";
 import {
   TokenNameEntry,
   FigmaComponent,
@@ -45,7 +45,7 @@ function mapTokenValues(
 }
 
 function mapTokens(
-  this: FigmaDashCore &
+  this: MeiucaEngineCore &
     Functions & { handleMappedTokenValues: typeof handleMappedTokenValues },
   tokenNames: string[][],
   mappedTokenValues: MapTokenValueReturn[]
@@ -84,7 +84,7 @@ function mapTokens(
   };
 }
 
-export default function init(core: FigmaDashCore) {
+export default function init(core: MeiucaEngineCore) {
   return {
     mapTokenValues: mapTokenValues.bind({
       ...core.functions,

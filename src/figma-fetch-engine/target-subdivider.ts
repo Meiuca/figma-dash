@@ -1,5 +1,5 @@
 import { writeFileSync, existsSync, mkdirSync } from "fs";
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 import lodash from "lodash";
 import prettier from "prettier";
 import path from "path";
@@ -29,7 +29,11 @@ function subdivide(item: Entry, parentOut: string, output: Meta[]) {
   });
 }
 
-export default function (target: Target, output: Meta[], core: FigmaDashCore) {
+export default function (
+  target: Target,
+  output: Meta[],
+  core: MeiucaEngineCore
+) {
   const {
     config: { figma },
     functions: { cleanStr },

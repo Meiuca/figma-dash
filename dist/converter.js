@@ -6,14 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const style_dictionary_1 = __importDefault(require("./style-dictionary"));
-const figma_dash_core_1 = require("figma-dash-core");
+const meiuca_engine_core_1 = require("meiuca-engine-core");
 const excludedObjects = ["fonts", "figma", "patterns", "globals"];
 function log(module, meta, core) {
     if (excludedObjects.includes(module))
         return;
     let moduleInfo = core.config[module];
     if (!moduleInfo)
-        throw new figma_dash_core_1.FigmaDashError(`module ${module} does not exist`);
+        throw new meiuca_engine_core_1.MeiucaEngineError(`module ${module} does not exist`);
     console.log("\n", chalk_1.default.greenBright("info"), "Converting module:", module);
     style_dictionary_1.default(meta, module, moduleInfo, core);
 }

@@ -4,12 +4,6 @@ require("dotenv").config();
 module.exports = {
   globals: {
     /**
-     * Your Design System identifier.
-     * Use only lowercase letters
-     */
-    ds: "jota",
-
-    /**
      * `classic` -> `type-category-id1-id2...`
      *
      * `inverted` -> `category-type-id1-id2...`

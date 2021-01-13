@@ -1,11 +1,11 @@
 import InitComponentsPropParser from "./component-props-parser";
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 
 import { FigmaComponent } from "../../../types";
 
 export default function handleChildren(
   component: FigmaComponent,
-  core: FigmaDashCore
+  core: MeiucaEngineCore
 ) {
   let { getOutArray, parseComponentProps } = InitComponentsPropParser(core);
 

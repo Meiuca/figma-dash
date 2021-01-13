@@ -11,7 +11,7 @@ const data_handler_1 = __importDefault(require("./data-handler"));
 const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const target_subdivider_1 = __importDefault(require("./target-subdivider"));
-const figma_dash_core_1 = require("figma-dash-core");
+const meiuca_engine_core_1 = require("meiuca-engine-core");
 async function default_1(args = {}) {
     let figmaUrl = "";
     const { core: { config: { figma }, functions: { parseFigmaSrc }, validations: { validateFigmaConfig }, }, } = this;
@@ -45,7 +45,7 @@ async function default_1(args = {}) {
         }));
     }
     catch (err) {
-        throw new figma_dash_core_1.FigmaDashError(err, `error thrown when fetching ${figmaUrl}`);
+        throw new meiuca_engine_core_1.MeiucaEngineError(err, `error thrown when fetching ${figmaUrl}`);
     }
     console.log("\n", chalk_1.default.greenBright("info"), "Tokens successfully imported");
     if (args.convert)

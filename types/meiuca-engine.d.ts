@@ -47,7 +47,7 @@ declare interface DoAllArgs extends InitArgs, ConvertArgs {
 }
 
 /**
- *  Generate sample jota-web.config.js
+ *  Generate sample meiuca-engine.config.js
  */
 export function init(args?: InitArgs): void;
 
@@ -62,7 +62,7 @@ export function importFromFigma(args?: ImportArgs): Promise<void>;
 export function convertTokens(args?: ConvertArgs): void;
 
 /**
- * @requires module figma-dash-fonts
+ * @requires meiuca-engine-fonts
  *
  * Download and link fonts
  */

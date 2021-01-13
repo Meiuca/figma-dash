@@ -15,7 +15,7 @@ const convertTokens = (args = {}) => {
 };
 
 const linkFonts = async () => {
-  await require("figma-dash-fonts").default();
+  await require("meiuca-engine-fonts").default();
 };
 
 const doAll = async (args = {}) => {
@@ -23,7 +23,7 @@ const doAll = async (args = {}) => {
 
   await fd.importFromFigma({ ...args, convert: true });
 
-  if (args.link) await require("figma-dash-fonts").default(fd.core);
+  if (args.link) await require("meiuca-engine-fonts").default(fd.core);
 };
 
 module.exports = {

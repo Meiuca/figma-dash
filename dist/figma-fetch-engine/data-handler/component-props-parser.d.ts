@@ -1,7 +1,7 @@
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 import { FigmaComponent, Target } from "../../../types";
 declare function getOutArray(): Target[];
-export default function init(core: FigmaDashCore): {
+export default function init(core: MeiucaEngineCore): {
     parseComponentProps: (component: FigmaComponent) => void;
     getOutArray: typeof getOutArray;
 };

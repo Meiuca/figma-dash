@@ -1,2 +1,2 @@
-import FigmaDash from "../index";
-export default function (this: FigmaDash, args?: import("../../types/figma-dash").ImportArgs): Promise<void>;
+import MeiucaEngine from "../index";
+export default function (this: MeiucaEngine, args?: import("../../types/meiuca-engine").ImportArgs): Promise<void>;

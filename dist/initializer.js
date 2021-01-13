@@ -13,9 +13,9 @@ async function default_1(args = {}) {
     if (args.path && !fs_1.existsSync(args.path))
         fs_1.mkdirSync(args.path, { recursive: true });
     let pathToSrc = path_1.default.resolve(__dirname, "../defaults/config.js");
-    let pathToDest = path_1.default.resolve(args.path || "./", "./figma-dash.config.js");
+    let pathToDest = path_1.default.resolve(args.path || "./", "./meiuca-engine.config.js");
     if (!fs_1.existsSync(pathToDest) || args.force) {
-        console.log(chalk_1.default.bold.green(figlet_1.default.textSync("FIGMA DASH", "JS Block Letters")), `\n\n\t\t\tWelcome\n\n`, "Initialized with sample configuration\n\n");
+        console.log(chalk_1.default.bold.green(figlet_1.default.textSync("MEIUCA ENGINE", "JS Block Letters")), `\n\n\t\t\tWelcome\n\n`, "Initialized with sample configuration\n\n");
         fs_1.copyFileSync(pathToSrc, pathToDest);
         await inquirer_1.prompt({
             name: "pause",
@@ -23,7 +23,7 @@ async function default_1(args = {}) {
         });
     }
     else {
-        console.log("\n", chalk_1.default.greenBright("info"), "Figma Dash config file already exists.\n");
+        console.log("\n", chalk_1.default.greenBright("info"), "Meiuca Engine config file already exists.\n");
     }
     if (args.path)
         process.chdir(args.path);

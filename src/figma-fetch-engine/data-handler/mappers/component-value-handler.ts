@@ -1,4 +1,4 @@
-import FigmaDashCore from "figma-dash-core";
+import MeiucaEngineCore from "meiuca-engine-core";
 
 import {
   ComponentProps,
@@ -9,7 +9,7 @@ import {
 export default function (
   tokenValue: SignedString,
   attributes: StyleAttributes,
-  core: FigmaDashCore
+  core: MeiucaEngineCore
 ) {
   if (!tokenValue.chars || attributes.category !== core.config.globals.ds)
     return tokenValue;
