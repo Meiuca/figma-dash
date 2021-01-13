@@ -1,19 +1,90 @@
-$bradius-size-sm: 8px;
+
+// Do not edit directly
+// Generated on Tue, 12 Jan 2021 23:11:40 GMT
+
+$border-size-none: 0px;
+$border-size-hairline: 1px;
+$border-size-thin: 2px;
+$border-size-thick: 4px;
+$border-size-heavy: 8px;
+$opacity-level-semiopaque: 0.80;
+$opacity-level-intense: 0.64;
+$opacity-level-medium: 0.32;
+$opacity-level-light: 0.16;
+$opacity-level-semitransparent: 0.08;
+$shadow-size-1-b: 8px;
+$shadow-size-1-x: 0px;
+$shadow-size-1-y: 4px;
+$shadow-size-1-stack: 8px 0px 4px;
+$shadow-size-2-b: 24px;
+$shadow-size-2-x: 0px;
+$shadow-size-2-y: 8px;
+$shadow-size-2-stack: 24px 0px 8px;
+$shadow-size-3-b: 32px;
+$shadow-size-3-x: 0px;
+$shadow-size-3-y: 16px;
+$shadow-size-3-stack: 32px 0px 16px;
+$shadow-size-4-b: 48px;
+$shadow-size-4-x: 0px;
+$shadow-size-4-y: 16px;
+$shadow-size-4-stack: 48px 0px 16px;
+$spacing-size-quarck: 4px;
+$spacing-size-nano: 8px;
+$spacing-size-xxxs: 16px;
+$spacing-size-xxs: 24px;
+$spacing-size-xs: 32px;
+$spacing-size-sm: 40px;
+$spacing-size-md: 48px;
+$spacing-size-lg: 56px;
+$spacing-size-xl: 64px;
+$spacing-size-xxl: 80px;
+$spacing-size-xxxl: 120px;
+$spacing-size-huge: 160px;
+$spacing-size-giant: 200px;
+$spacing-squish-size-quarck-v: 4px;
+$spacing-squish-size-quarck-h: 8px;
+$spacing-squish-size-quarck-stack: 4px 8px;
+$spacing-squish-size-nano-v: 8px;
+$spacing-squish-size-nano-h: 16px;
+$spacing-squish-size-nano-stack: 8px 16px;
+$spacing-squish-size-xs-v: 16px;
+$spacing-squish-size-xs-h: 24px;
+$spacing-squish-size-xs-stack: 16px 24px;
+$spacing-squish-size-sm-v: 16px;
+$spacing-squish-size-sm-h: 32px;
+$spacing-squish-size-sm-stack: 16px 32px;
+$radius-size-none: 0px;
+$radius-size-sm: 8px;
+$radius-size-md: 16px;
+$radius-size-lg: 24px;
+$radius-size-pill: 500px;
+$radius-size-circular: 50%;
+$font-size-xxxs: 12px;
+$font-size-xxs: 14px;
+$font-size-xs: 16px;
+$font-size-sm: 20px;
+$font-size-md: 24px;
+$font-size-lg: 32px;
+$font-size-xl: 40px;
+$font-size-xxl: 48px;
+$font-size-xxxl: 64px;
+$font-size-display: 80px;
+$font-size-giant: 96px;
+$font-family-highlight: Archivo;
+$font-weight-bold: 700;
+$font-weight-medium: 600;
+$font-weight-regular: 400;
+$lineheight-size-tight: 100%;
+$lineheight-size-medium: 110%;
+$lineheight-size-distant: 150%;
+$lineheight-size-superdistant: 200%;
 $brand-color-primary-1: #EFE2FE;
+$brand-color-primary-2: #D5B1FB;
+$brand-color-primary-3: #6E0AD6;
 $brand-color-primary-4: #41067F;
-$bradius-size-md: 16px;
-
-.test-jota-component-1 {
- border-radius: $bradius-size-sm;
- background-color: $brand-color-primary-1;
- color: $brand-color-primary-4;
- height: 100px;
- width: 200px;
- font-size: 30px;
-}
-
-.test-jota-component-1:hover {
- border-radius: $bradius-size-md;
- background-color: $brand-color-primary-4;
- color: $brand-color-primary-1;
-}
+$brand-color-primary-5: #28044E;
+$neutral-color-1: #ffffff;
+$neutral-color-2: #E4E5E7;
+$neutral-color-3: #A6AAAF;
+$neutral-color-4: #70747B;
+$neutral-color-5: #000000;

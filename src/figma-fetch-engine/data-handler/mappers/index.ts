@@ -1,11 +1,11 @@
 import FigmaDashCore from "figma-dash-core";
 import { Functions } from "figma-dash-core/dist/functions";
+import { Globals } from "figma-dash-core/dist/config-handler";
 import {
   TokenNameEntry,
   FigmaComponent,
   MapTokenValueReturn,
   Target,
-  TargetData,
   StyleAttributes,
 } from "../../../../types";
 import { handleMappedTokenValues } from "./mapped-token-values-handler";
@@ -19,7 +19,7 @@ export function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
 }
 
 function mapTokenValues(
-  this: Functions,
+  this: Functions & Globals,
   child: FigmaComponent
 ): MapTokenValueReturn {
   if (this.parentContainerTokenRegexTest(child.name) && child.children) {
@@ -27,17 +27,13 @@ function mapTokenValues(
       .filter(({ name }) => this.childContainerTokenRegexTest(name))
       .map((nestedChild) => {
         {
-          let tokenName = nestedChild.children?.find(
-            (tokenValue) => !this.tokenValueRegexTest(tokenValue.name)
-          );
-
-          let token = nestedChild.children?.find((tokenValue) =>
-            this.tokenValueRegexTest(tokenValue.name)
-          );
+          let tokenValue = this.patterns.childContainerTokenIdentifier.exec(
+            nestedChild.name
+          )!;
 
           return [
-            tokenName!.name.toLowerCase(),
-            token ? this.cleanTokenValue(token.name) : "not found",
+            tokenValue[1]!.toLowerCase(),
+            this.cleanTokenValue(tokenValue[2]!),
           ];
         }
       });
@@ -80,18 +76,20 @@ function mapTokens(
       attributes
     );
 
-    return (prop
-      .reverse()
-      .reduce(
-        (prev, curr) => (({ [curr]: prev } as unknown) as TargetData),
-        objToBeReduced
-      ) as unknown) as Target;
+    return (prop.reverse().reduce(
+      //@ts-ignore
+      (prev, curr) => ({ [curr]: prev }),
+      objToBeReduced
+    ) as unknown) as Target;
   };
 }
 
-export default function init(core: FigmaDashCore): Mappers {
+export default function init(core: FigmaDashCore) {
   return {
-    mapTokenValues: mapTokenValues.bind(core.functions),
+    mapTokenValues: mapTokenValues.bind({
+      ...core.functions,
+      ...core.config.globals,
+    }),
     mapTokens: mapTokens.bind({
       ...core,
       ...core.functions,

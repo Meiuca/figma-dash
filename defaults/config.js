@@ -19,9 +19,9 @@ module.exports = {
     // These are the default patterns
     /* patterns: {
       tokenNameIdentifier: /^\$/,
-      tokenValueIdentifier: /^#|^~|\d+(?=px|rem|em|%|\.\d+)/,
+      tokenValueIdentifier: /^#|^--|\d+(?=px|rem|em|%|\.\d+)/,
       parentContainerTokenIdentifier: /^:{2}/,
-      childContainerTokenIdentifier: /^:{1}/,
+      childContainerTokenIdentifier: /(\w+):\W*(\w+)/,
     }, */
   },
 

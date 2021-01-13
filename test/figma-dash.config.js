@@ -6,7 +6,8 @@ module.exports = {
 
   figma: {
     accessToken: "142385-65617358-2a56-4c81-8fe6-44dc301b7976",
-    src: "irh24FKBf9HYTKyt1MqVea",
+    src:
+      "https://www.figma.com/file/U5uzb8VJKmsiUWehyk5iPo/Design-Tokens-Figma-Dash?node-id=0%3A1",
     output: "tokens/",
   },
 
@@ -29,11 +30,11 @@ module.exports = {
       files: [
         {
           destination: "{f}.css",
-          format: "css/components",
+          format: "css/variables",
         },
         {
           destination: "{f}.scss",
-          format: "scss/components",
+          format: "scss/variables",
         },
       ],
     },

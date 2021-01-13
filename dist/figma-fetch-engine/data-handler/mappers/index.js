@@ -14,11 +14,10 @@ function mapTokenValues(child) {
             .filter(({ name }) => this.childContainerTokenRegexTest(name))
             .map((nestedChild) => {
             {
-                let tokenName = nestedChild.children?.find((tokenValue) => !this.tokenValueRegexTest(tokenValue.name));
-                let token = nestedChild.children?.find((tokenValue) => this.tokenValueRegexTest(tokenValue.name));
+                let tokenValue = this.patterns.childContainerTokenIdentifier.exec(nestedChild.name);
                 return [
-                    tokenName.name.toLowerCase(),
-                    token ? this.cleanTokenValue(token.name) : "not found",
+                    tokenValue[1].toLowerCase(),
+                    this.cleanTokenValue(tokenValue[2]),
                 ];
             }
         });
@@ -46,14 +45,15 @@ function mapTokens(tokenNames, mappedTokenValues) {
                 break;
         }
         let objToBeReduced = this.handleMappedTokenValues(mappedTokenValues, index, attributes);
-        return prop
-            .reverse()
-            .reduce((prev, curr) => ({ [curr]: prev }), objToBeReduced);
+        return prop.reverse().reduce((prev, curr) => ({ [curr]: prev }), objToBeReduced);
     };
 }
 function init(core) {
     return {
-        mapTokenValues: mapTokenValues.bind(core.functions),
+        mapTokenValues: mapTokenValues.bind({
+            ...core.functions,
+            ...core.config.globals,
+        }),
         mapTokens: mapTokens.bind({
             ...core,
             ...core.functions,

@@ -176,9 +176,17 @@ figlet@^1.5.0:
   resolved "https://registry.yarnpkg.com/figlet/-/figlet-1.5.0.tgz#2db4d00a584e5155a96080632db919213c3e003c"
   integrity sha512-ZQJM4aifMpz6H19AW1VqvZ7l4pOE9p7i/3LyxgO2kp+PO/VcDYNqIHEMtkccqIhTXMKci4kjueJr/iCQEaT/Ww==
 
+"figma-dash-core@https://github.com/Meiuca/figma-dash-core":
+  version "1.0.0"
+  uid "82f835362599a157d4ff52beb4d8492584eee1d5"
+  resolved "https://github.com/Meiuca/figma-dash-core#82f835362599a157d4ff52beb4d8492584eee1d5"
+  dependencies:
+    chalk "^4.1.0"
+    lodash "^4.17.20"
+
 "figma-dash-core@https://github.com/Meiuca/figma-dash-core.git":
   version "1.0.0"
-  resolved "https://github.com/Meiuca/figma-dash-core.git#764307311ada42f41607cc66de0f83bcaad0cb77"
+  resolved "https://github.com/Meiuca/figma-dash-core.git#82f835362599a157d4ff52beb4d8492584eee1d5"
   dependencies:
     chalk "^4.1.0"
     lodash "^4.17.20"
