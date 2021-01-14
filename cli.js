@@ -53,6 +53,6 @@ commander
 console.log(packageJson.name + " v" + packageJson.version);
 
 commander.parseAsync().catch((err) => {
-  console.log(`${err.name}\n${err.stack}`);
+  console.error(`${err.name}\n${err.stack}`);
   process.exit(1);
 });
