@@ -10,7 +10,7 @@ function default_1(tokenValue, attributes, core) {
         if (!mappedChars || !mappedChars[0] || !mappedChars[1] || !mappedChars[2])
             break;
         tokenValue.chars = tokenValue.chars.replace(mappedChars[0], "");
-        mappedChars[2] = mappedChars[2].replace(/^\s*/g, "");
+        mappedChars[2] = mappedChars[2].trimStart();
         let parsedChars = (/[A-Za-z0-9\-_]+/.exec(mappedChars[2]) || [""])[0];
         let parsedItem = core.functions.tokenNameRegexTest(mappedChars[2])
             ? "{" + parsedChars.replace(/-/g, ".") + "}"

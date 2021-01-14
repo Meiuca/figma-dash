@@ -1,6 +1,5 @@
 import MeiucaEngineCore from "meiuca-engine-core";
 import { Functions } from "meiuca-engine-core/dist/functions";
-import { Globals } from "meiuca-engine-core/dist/config-handler";
 import {
   TokenNameEntry,
   FigmaComponent,
@@ -19,7 +18,7 @@ export function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
 }
 
 function mapTokenValues(
-  this: Functions & Globals,
+  this: Functions,
   child: FigmaComponent
 ): MapTokenValueReturn {
   if (this.parentContainerTokenRegexTest(child.name) && child.children) {
@@ -27,9 +26,7 @@ function mapTokenValues(
       .filter(({ name }) => this.childContainerTokenRegexTest(name))
       .map((nestedChild) => {
         {
-          let tokenValue = this.patterns.childContainerTokenIdentifier.exec(
-            nestedChild.name
-          )!;
+          let tokenValue = this.childContainerTokenRegexExec(nestedChild.name)!;
 
           return [
             tokenValue[1]!.toLowerCase(),
@@ -45,8 +42,7 @@ function mapTokenValues(
 }
 
 function mapTokens(
-  this: MeiucaEngineCore &
-    Functions & { handleMappedTokenValues: typeof handleMappedTokenValues },
+  this: MapTokensThisArg,
   tokenNames: string[][],
   mappedTokenValues: MapTokenValueReturn[]
 ) {
@@ -84,18 +80,19 @@ function mapTokens(
   };
 }
 
-export default function init(core: MeiucaEngineCore) {
+export default function init(core: MeiucaEngineCore): Mappers {
   return {
-    mapTokenValues: mapTokenValues.bind({
-      ...core.functions,
-      ...core.config.globals,
-    }),
+    mapTokenValues: mapTokenValues.bind(core.functions),
     mapTokens: mapTokens.bind({
       ...core,
       ...core.functions,
       handleMappedTokenValues,
     }),
   };
+}
+
+interface MapTokensThisArg extends MeiucaEngineCore, Functions {
+  handleMappedTokenValues: typeof handleMappedTokenValues;
 }
 
 export interface Mappers {

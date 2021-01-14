@@ -14,7 +14,7 @@ function mapTokenValues(child) {
             .filter(({ name }) => this.childContainerTokenRegexTest(name))
             .map((nestedChild) => {
             {
-                let tokenValue = this.patterns.childContainerTokenIdentifier.exec(nestedChild.name);
+                let tokenValue = this.childContainerTokenRegexExec(nestedChild.name);
                 return [
                     tokenValue[1].toLowerCase(),
                     this.cleanTokenValue(tokenValue[2]),
@@ -50,10 +50,7 @@ function mapTokens(tokenNames, mappedTokenValues) {
 }
 function init(core) {
     return {
-        mapTokenValues: mapTokenValues.bind({
-            ...core.functions,
-            ...core.config.globals,
-        }),
+        mapTokenValues: mapTokenValues.bind(core.functions),
         mapTokens: mapTokens.bind({
             ...core,
             ...core.functions,

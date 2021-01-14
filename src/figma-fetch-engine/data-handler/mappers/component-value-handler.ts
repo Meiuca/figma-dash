@@ -26,7 +26,7 @@ export default function (
 
     tokenValue.chars = tokenValue.chars.replace(mappedChars[0], "");
 
-    mappedChars[2] = mappedChars[2].replace(/^\s*/g, "");
+    mappedChars[2] = mappedChars[2].trimStart();
 
     let parsedChars = (/[A-Za-z0-9\-_]+/.exec(mappedChars[2]) || [""])[0];
 
