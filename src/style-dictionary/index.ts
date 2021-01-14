@@ -33,11 +33,14 @@ export default function runStyleDictionary(
         }
 
         SDClone.extend({
+          ...moduleConfig,
           source: [src],
           include: mappedInclude,
           platforms: {
             [module]: {
-              transformGroup: module,
+              ...(moduleConfig.tokens.transforms
+                ? { transforms: moduleConfig.tokens.transforms }
+                : { transformGroup: module }),
               buildPath: moduleConfig.tokens.output.dir,
               files: [file],
             },

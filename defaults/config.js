@@ -23,9 +23,9 @@ module.exports = {
     accessToken: process.env.FIGMA_ACCESS_TOKEN,
 
     /**
-     * `https://www.figma.com/file/aaaaaaaaaaa/`
+     * `https://www.figma.com/file/<id>/`
      *  or
-     *  `aaaaaaaaaaa`
+     *  `id`
      */
     src: "aaaaaaaaaaa",
 
@@ -33,71 +33,59 @@ module.exports = {
   },
 
   /**
-   *   * You must declare more than zero if you are going to use 'jota-web convert-tokens'
+   *   * You must declare more than zero if you are going to use 'convert-tokens'
    *   * The key of the objects must be one of:
-   *    * https://github.com/amzn/style-dictionary/blob/main/docs/transform_groups.md
-   *    * `default` ( default web transforms )
+   *    * https://amzn.github.io/style-dictionary/#/transform_groups
+   *    * `default` ( default css transforms )
    *    * `native`
    */
   default: {
-    // `isNotComponent` can also be declared here
-    // filter: "isNotComponent",
-
     tokens: {
+      // https://amzn.github.io/style-dictionary/#/formats?id=filtering-tokens
+      // filter: "fooFilter",
+
+      /**
+       * If you declare this property,
+       * the name of the module ( default, in this case )
+       * will NOT be used as a transform group
+       */
+      // transforms: ['name/ti/kebab'],
+
       output: {
-        dir: "src/styles/web/",
+        dir: "src/styles/",
+
+        // Useless, since `files` is declared
+        // extension: ".scss",
+
+        // Useless, since `files` is declared
+        // https://amzn.github.io/style-dictionary/#/formats
+        // format: "scss/variables",
       },
       files: [
         {
           // '{f}' for filename
-          destination: "{f}-components.scss",
-
-          /**
-           * One of:
-           *  * https://github.com/amzn/style-dictionary/blob/main/docs/formats.md
-           *  * `css/components`
-           *  * `scss/components`
-           */
-          format: "scss/components",
-
-          /**
-           * This property is usefull when creating multiple files ( import without `--no-separated-tokens` flag ),
-           * although it is not recommended in this case
-           */
-          include: "tokens/tokens.json",
-        },
-        {
-          destination: "{f}-variables.scss",
+          destination: "{f}.scss",
 
           format: "scss/variables",
 
-          // `isNotComponent` is a custom internal filter that cleans dirty output generated
-          // by formatters that do not support components
-          filter: "isNotComponent",
+          // This property can be usefull when creating multiple files ( import without `--no-separated-tokens` flag )
+          // include: "tokens/tokens.json",
+
+          // The filter can be placed here as well
+          // filter: "barFilter",
         },
       ],
     },
   },
 
-  /*
-   * native: {
-   *   tokens: {
-   *     output: {
-   *       dir: "src/styles/native/",
-   *       extension: ".js",
-   *       format: "javascript/es6",
-   *     },
-   *   },
-   * },
-   */
-
   /**
    * You can declare files, urls or directLinks, but you cannot declare
-   * `fonts: {}` if you are going to use `jota-web link-fonts`
+   * `fonts: {}` if you are going to use `link-fonts`
    */
   fonts: {
     output: "assets/fonts/",
 
+    // Optional
     linkCommand: "yarn react-native link",
 
     /**

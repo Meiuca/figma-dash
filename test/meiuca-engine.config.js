@@ -11,16 +11,16 @@ module.exports = {
     output: "tokens/",
   },
 
-  /* web: {
+  foo: {
     tokens: {
-      filter: "isNotComponent",
+      transforms: ["name/cti/camel"],
       output: {
         dir: "src/styles/web/",
         extension: ".scss",
         format: "scss/variables",
       },
     },
-  }, */
+  },
 
   default: {
     tokens: {

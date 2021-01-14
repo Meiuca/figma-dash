@@ -289,7 +289,7 @@ lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20:
 
 "meiuca-engine-core@https://github.com/Meiuca/meiuca-engine-core":
   version "1.0.0"
-  resolved "https://github.com/Meiuca/meiuca-engine-core#c77a770315e9dc83c958ed7434167307c7b260d8"
+  resolved "https://github.com/Meiuca/meiuca-engine-core#db6d4b40d94a03c0b02c6a90f7df9e6f7b878018"
   dependencies:
     chalk "^4.1.0"
     lodash "^4.17.20"
