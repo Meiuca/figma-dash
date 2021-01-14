@@ -1,17 +1,17 @@
 "use strict";
 
-const FigmaDash = require("./dist").default;
+const MeiucaEngine = require("./dist").default;
 
 const init = async (args = {}) => {
-  return await FigmaDash.init(args);
+  return await MeiucaEngine.init(args);
 };
 
 const importFromFigma = async (args = {}) => {
-  await new FigmaDash().importFromFigma(args);
+  await new MeiucaEngine().importFromFigma(args);
 };
 
 const convertTokens = (args = {}) => {
-  new FigmaDash().convertTokens(args);
+  new MeiucaEngine().convertTokens(args);
 };
 
 const linkFonts = async () => {

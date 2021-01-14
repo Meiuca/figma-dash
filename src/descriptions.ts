@@ -8,7 +8,7 @@ export const convert = "Convert style tokens";
 export const link = "Download and link fonts";
 
 export const init =
-  "Generate sample " + chalk.greenBright("figma-dash.config.js");
+  "Generate sample " + chalk.greenBright("meiuca-engine.config.js");
 
 export const force = "Can be used to reset the configuration";
 

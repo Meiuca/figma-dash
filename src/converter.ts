@@ -5,7 +5,7 @@ import MeiucaEngine from "./index";
 import { Meta } from "../types";
 import MeiucaEngineCore, { MeiucaEngineError } from "meiuca-engine-core";
 
-const excludedObjects = ["fonts", "figma", "patterns", "globals"];
+const excludedObjects = ["fonts", "figma", "globals"];
 
 function log(module: string, meta: Meta[], core: MeiucaEngineCore) {
   if (excludedObjects.includes(module)) return;
@@ -24,14 +24,19 @@ export default function (
   this: MeiucaEngine,
   args: import("../types/meiuca-engine").ConvertArgs = {}
 ) {
-  let meta = require(path.resolve(
-    this.core.config.figma.output,
-    "./meta.json"
-  )) as Meta[];
+  let meta: Meta[];
+
+  try {
+    meta = require(path.resolve(this.core.config.figma.output, "./meta.json"));
+  } catch (err) {
+    throw new MeiucaEngineError(err, "Try 'import-from-figma' first");
+  }
 
   if (args.module) {
     log(args.module, meta, this.core);
   } else {
-    Object.keys(this.core.config).forEach((cf) => log(cf, meta, this.core));
+    Object.keys(this.core.config).forEach((module) =>
+      log(module, meta, this.core)
+    );
   }
 }

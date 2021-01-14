@@ -7,7 +7,7 @@ const path_1 = __importDefault(require("path"));
 const chalk_1 = __importDefault(require("chalk"));
 const style_dictionary_1 = __importDefault(require("./style-dictionary"));
 const meiuca_engine_core_1 = require("meiuca-engine-core");
-const excludedObjects = ["fonts", "figma", "patterns", "globals"];
+const excludedObjects = ["fonts", "figma", "globals"];
 function log(module, meta, core) {
     if (excludedObjects.includes(module))
         return;
@@ -18,12 +18,18 @@ function log(module, meta, core) {
     style_dictionary_1.default(meta, module, moduleInfo, core);
 }
 function default_1(args = {}) {
-    let meta = require(path_1.default.resolve(this.core.config.figma.output, "./meta.json"));
+    let meta;
+    try {
+        meta = require(path_1.default.resolve(this.core.config.figma.output, "./meta.json"));
+    }
+    catch (err) {
+        throw new meiuca_engine_core_1.MeiucaEngineError(err, "Try 'import-from-figma' first");
+    }
     if (args.module) {
         log(args.module, meta, this.core);
     }
     else {
-        Object.keys(this.core.config).forEach((cf) => log(cf, meta, this.core));
+        Object.keys(this.core.config).forEach((module) => log(module, meta, this.core));
     }
 }
 exports.default = default_1;
