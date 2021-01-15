@@ -5,9 +5,9 @@ import {
   FigmaComponent,
   MapTokenValueReturn,
   Target,
-  StyleAttributes,
 } from "../../../../types";
 import { handleMappedTokenValues } from "./mapped-token-values-handler";
+import transformAttributes from "./attributes-transformer";
 
 export function reduceEntries(prev: TokenNameEntry, curr: TokenNameEntry) {
   prev = typeof prev == "object" ? Object.values(prev)[0]!.value : prev;
@@ -46,30 +46,16 @@ function mapTokens(
   tokenNames: string[][],
   mappedTokenValues: MapTokenValueReturn[]
 ) {
+  let attr = transformAttributes(
+    this.config.globals.tokenNameModel,
+    tokenNames.flat(this.depth(tokenNames)) as string[]
+  );
+
   return (prop: string[], index: number) => {
-    let attributes: StyleAttributes;
-
-    switch (this.config.globals.tokenNameModel) {
-      case "inverted":
-        attributes = {
-          category: tokenNames.flat(this.depth(tokenNames))[0] as string,
-          type: tokenNames.flat(this.depth(tokenNames))[1] as string,
-        };
-        break;
-
-      /* also classic */
-      default:
-        attributes = {
-          type: tokenNames.flat(this.depth(tokenNames))[0] as string,
-          category: tokenNames.flat(this.depth(tokenNames))[1] as string,
-        };
-        break;
-    }
-
     let objToBeReduced = this.handleMappedTokenValues(
       mappedTokenValues,
       index,
-      attributes
+      attr
     );
 
     return (prop.reverse().reduce(

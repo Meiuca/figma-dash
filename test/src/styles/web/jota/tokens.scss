@@ -1,6 +1,6 @@
 
 // Do not edit directly
-// Generated on Thu, 14 Jan 2021 00:09:34 GMT
+// Generated on Fri, 15 Jan 2021 15:13:53 GMT
 
 $border-size-none: 0px;
 $border-size-hairline: 1px;
@@ -12,22 +12,22 @@ $opacity-level-intense: 0.64;
 $opacity-level-medium: 0.32;
 $opacity-level-light: 0.16;
 $opacity-level-semitransparent: 0.08;
-$shadow-size-1-b: 8px;
-$shadow-size-1-x: 0px;
-$shadow-size-1-y: 4px;
-$shadow-size-1-stack: 8px 0px 4px;
-$shadow-size-2-b: 24px;
-$shadow-size-2-x: 0px;
-$shadow-size-2-y: 8px;
-$shadow-size-2-stack: 24px 0px 8px;
-$shadow-size-3-b: 32px;
-$shadow-size-3-x: 0px;
-$shadow-size-3-y: 16px;
-$shadow-size-3-stack: 32px 0px 16px;
-$shadow-size-4-b: 48px;
-$shadow-size-4-x: 0px;
-$shadow-size-4-y: 16px;
-$shadow-size-4-stack: 48px 0px 16px;
+$shadow-level-1-x: 0px;
+$shadow-level-1-y: 4px;
+$shadow-level-1-b: 8px;
+$shadow-level-1-stack: 0px 4px 8px;
+$shadow-level-2-x: 0px;
+$shadow-level-2-y: 8px;
+$shadow-level-2-b: 24px;
+$shadow-level-2-stack: 0px 8px 24px;
+$shadow-level-3-x: 0px;
+$shadow-level-3-y: 16px;
+$shadow-level-3-b: 32px;
+$shadow-level-3-stack: 0px 16px 32px;
+$shadow-level-4-x: 0px;
+$shadow-level-4-y: 16px;
+$shadow-level-4-b: 48px;
+$shadow-level-4-stack: 0px 16px 48px;
 $spacing-size-quarck: 4px;
 $spacing-size-nano: 8px;
 $spacing-size-xxxs: 16px;
@@ -70,14 +70,14 @@ $font-size-xxl: 48px;
 $font-size-xxxl: 64px;
 $font-size-display: 80px;
 $font-size-giant: 96px;
-$font-family-highlight: Archivo;
+$font-family-highlight: 'Archivo';
 $font-weight-bold: 700;
 $font-weight-medium: 600;
 $font-weight-regular: 400;
-$lineheight-size-tight: 100%;
-$lineheight-size-medium: 110%;
-$lineheight-size-distant: 150%;
-$lineheight-size-superdistant: 200%;
+$line-height-tight: 100%;
+$line-height-medium: 110%;
+$line-height-distant: 150%;
+$line-height-superdistant: 200%;
 $brand-color-primary-1: #FEF0EC;
 $brand-color-primary-2: #FBD1C6;
 $brand-color-primary-3: #F04E23;

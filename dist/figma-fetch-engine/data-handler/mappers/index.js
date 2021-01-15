@@ -1,7 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.reduceEntries = void 0;
 const mapped_token_values_handler_1 = require("./mapped-token-values-handler");
+const attributes_transformer_1 = __importDefault(require("./attributes-transformer"));
 function reduceEntries(prev, curr) {
     prev = typeof prev == "object" ? Object.values(prev)[0].value : prev;
     curr = typeof curr == "object" ? Object.values(curr)[0].value : curr;
@@ -28,23 +32,9 @@ function mapTokenValues(child) {
     }
 }
 function mapTokens(tokenNames, mappedTokenValues) {
+    let attr = attributes_transformer_1.default(this.config.globals.tokenNameModel, tokenNames.flat(this.depth(tokenNames)));
     return (prop, index) => {
-        let attributes;
-        switch (this.config.globals.tokenNameModel) {
-            case "inverted":
-                attributes = {
-                    category: tokenNames.flat(this.depth(tokenNames))[0],
-                    type: tokenNames.flat(this.depth(tokenNames))[1],
-                };
-                break;
-            default:
-                attributes = {
-                    type: tokenNames.flat(this.depth(tokenNames))[0],
-                    category: tokenNames.flat(this.depth(tokenNames))[1],
-                };
-                break;
-        }
-        let objToBeReduced = this.handleMappedTokenValues(mappedTokenValues, index, attributes);
+        let objToBeReduced = this.handleMappedTokenValues(mappedTokenValues, index, attr);
         return prop.reverse().reduce((prev, curr) => ({ [curr]: prev }), objToBeReduced);
     };
 }
