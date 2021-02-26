@@ -2,6 +2,7 @@ import StyleDictionary from "style-dictionary";
 import MeiucaEngineCore from "meiuca-engine-core";
 import * as cssFormatBlock from "./component-format-block/css";
 import * as scssFormatBlock from "./component-format-block/scss";
+import * as rnFormatBlock from "./react-native-format-block";
 import transformer from "./react-native-transformer";
 
 export default function createRegisters(
@@ -33,6 +34,10 @@ export default function createRegisters(
   dictionary.registerFormat({
     ...scssFormatBlock,
     formatter: scssFormatBlock.formatter.bind(core),
+  });
+
+  dictionary.registerFormat({
+    ...rnFormatBlock,
   });
 
   dictionary.registerFilter({

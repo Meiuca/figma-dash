@@ -1,14 +1,20 @@
 /**
  * Do not edit directly
- * Generated on Fri, 15 Jan 2021 15:13:53 GMT
+ * Generated on Fri, 26 Feb 2021 13:07:28 GMT
  */
 
 :root {
-  --border-size-none: 0px;
-  --border-size-hairline: 1px;
-  --border-size-thin: 2px;
-  --border-size-thick: 4px;
-  --border-size-heavy: 8px;
+  --border-width-none: 0px;
+  --border-width-hairline: 1px;
+  --border-width-thin: 2px;
+  --border-width-thick: 4px;
+  --border-width-heavy: 8px;
+  --border-radius-none: 0px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 16px;
+  --border-radius-lg: 24px;
+  --border-radius-pill: 500px;
+  --border-radius-circular: 50%;
   --opacity-level-semiopaque: 0.80;
   --opacity-level-intense: 0.64;
   --opacity-level-medium: 0.32;
@@ -55,12 +61,6 @@
   --spacing-squish-size-sm-v: 16px;
   --spacing-squish-size-sm-h: 32px;
   --spacing-squish-size-sm-stack: 16px 32px;
-  --radius-size-none: 0px;
-  --radius-size-sm: 8px;
-  --radius-size-md: 16px;
-  --radius-size-lg: 24px;
-  --radius-size-pill: 500px;
-  --radius-size-circular: 50%;
   --font-size-xxxs: 12px;
   --font-size-xxs: 14px;
   --font-size-xs: 16px;

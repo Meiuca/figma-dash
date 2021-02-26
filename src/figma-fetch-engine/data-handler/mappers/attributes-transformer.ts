@@ -6,23 +6,17 @@ export default function (
 ) {
   let attributes = {} as StyleAttributes;
 
-  let category = tokenNamesFlat[tokenNameModel == "inverted" ? 0 : 1]!;
+  attributes.category = tokenNamesFlat[tokenNameModel == "inverted" ? 0 : 1]!;
 
-  attributes.category = category;
+  attributes.type = tokenNamesFlat[tokenNameModel == "inverted" ? 1 : 0]!;
 
-  switch (tokenNameModel) {
-    case "inverted":
-      attributes.type = tokenNamesFlat[1]!;
-      break;
+  let alternativeSize = [
+    attributes.category == "level" && attributes.type != "opacity",
+    attributes.category == "width",
+    attributes.category == "radius",
+  ];
 
-    /* also classic */
-    default:
-      attributes.type = tokenNamesFlat[0]!;
-      break;
-  }
-
-  if (attributes.category == "level" && attributes.type != "opacity")
-    attributes.category = "size";
+  if (alternativeSize.includes(true)) attributes.category = "size";
 
   return attributes;
 }

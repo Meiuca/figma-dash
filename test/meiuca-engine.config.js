@@ -16,8 +16,8 @@ module.exports = {
       transforms: ["name/cti/camel"],
       output: {
         dir: "src/styles/web/",
-        extension: ".scss",
-        format: "scss/variables",
+        extension: ".js",
+        format: "javascript/react-native",
       },
     },
   },
@@ -33,8 +33,8 @@ module.exports = {
           format: "css/variables",
         },
         {
-          destination: "{f}.scss",
-          format: "scss/variables",
+          destination: "{f}.json",
+          format: "json/flat",
         },
       ],
     },

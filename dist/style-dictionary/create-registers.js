@@ -24,6 +24,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cssFormatBlock = __importStar(require("./component-format-block/css"));
 const scssFormatBlock = __importStar(require("./component-format-block/scss"));
+const rnFormatBlock = __importStar(require("./react-native-format-block"));
 const react_native_transformer_1 = __importDefault(require("./react-native-transformer"));
 function createRegisters(dictionary, core) {
     dictionary.registerTransform({
@@ -47,6 +48,9 @@ function createRegisters(dictionary, core) {
     dictionary.registerFormat({
         ...scssFormatBlock,
         formatter: scssFormatBlock.formatter.bind(core),
+    });
+    dictionary.registerFormat({
+        ...rnFormatBlock,
     });
     dictionary.registerFilter({
         name: "isNotComponent",
