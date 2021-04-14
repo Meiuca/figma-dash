@@ -44,8 +44,8 @@
     "figlet": "^1.5.0",
     "inquirer": "^7.3.3",
     "lodash": "^4.17.20",
-    "meiuca-engine-core": "https://github.com/Meiuca/meiuca-engine-core",
-    "meiuca-engine-fonts": "https://github.com/Meiuca/meiuca-engine-fonts",
+    "meiuca-engine-core": "git+https://34f081c16a96b44163ab33cd5a4bc83ba3f22f24:x-oauth-basic@github.com/Meiuca/meiuca-engine-core",
+    "meiuca-engine-fonts": "git+https://34f081c16a96b44163ab33cd5a4bc83ba3f22f24:x-oauth-basic@github.com/Meiuca/meiuca-engine-fonts",
     "prettier": "^2.2.0",
     "style-dictionary": "^2.10.2"
   },
