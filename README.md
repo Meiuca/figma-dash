@@ -26,8 +26,8 @@ Access the file `meiuca-engine.config.js` and manipulated this options bellow.
 
 ```js
 figma: {
-  accessToken: '189821-10d74047-8ea1-4d5c-bc28-368a40adf861',
-  src: 'https://www.figma.com/file/NEXaAtzC4PO0GdK1KJ2uYY/Zero-%7C-Design-Tokens-(Copy)?node-id=0%3A1',
+  accessToken: '189821-10d74047-8ea1-4444-bc28-*****',
+  src: 'https://www.figma.com/file/...',
   output: 'tokens/',
 },
 ```
