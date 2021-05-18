@@ -17,7 +17,8 @@
     "types"
   ],
   "scripts": {
-    "run-tsc": "rm -r dist && yarn tsc"
+    "run-tsc": "rm -r dist && yarn tsc",
+    "generate": "node cli.js all -t"
   },
   "keywords": [
     "style-dictionary",
